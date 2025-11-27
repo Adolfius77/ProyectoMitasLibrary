@@ -15,5 +15,5 @@ public interface ILibroDAO {
     boolean eliminarPorId(ObjectId _id)throws DaoException;
     Optional<Libro> encontrarPorTitulo(String titulo) throws DaoException;
     Optional<Libro> encontrarPorISBN(String ISBN) throws DaoException;
-    boolean actualizaStock(String id, int cantidadComprada);
+    void actualizaStock(String id, int cantidadComprada);
 }
