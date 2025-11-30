@@ -1,16 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Model;
 
 import java.util.Date;
+import org.bson.types.ObjectId; 
 
 /**
  *
- * @author jorge
+ * @author jorge y Angel
  */
 public class Resena {
+    
+    private ObjectId id;
     
     private String usuarioNombre;
     private int calificacion;
@@ -23,10 +22,19 @@ public class Resena {
         this.comentario = comentario;
         this.fecha = fecha;
     }
-    public Resena(){
+
+    public Resena() {
         
     }
     
+    // Getter y Setter para el ID
+    public ObjectId getId() {
+        return id;
+    }
+
+    public void setId(ObjectId id) {
+        this.id = id;
+    }
 
     public String getUsuarioNombre() {
         return usuarioNombre;
@@ -59,7 +67,5 @@ public class Resena {
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
-    
-    
     
 }
