@@ -94,4 +94,9 @@ public class ResenaDAO implements IRensaDAO {
             throw new DaoException("error al buscar reseñas por usuario", e);
         }
     }
+
+    @Override
+    public List<Resena> listarResenasPorLibro(String libroId) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
