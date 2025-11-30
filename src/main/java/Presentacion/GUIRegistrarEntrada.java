@@ -4,8 +4,6 @@
  */
 package Presentacion;
 
-
-
 /**
  *
  * @author garfi
@@ -15,14 +13,10 @@ public class GUIRegistrarEntrada extends javax.swing.JFrame {
     /**
      * Creates new form GUIPagPrincipal
      */
-   
-
     public GUIRegistrarEntrada() {
-       initComponents();
-        
-    }
+        initComponents();
 
-    
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -261,7 +255,7 @@ public class GUIRegistrarEntrada extends javax.swing.JFrame {
                 .addGap(74, 74, 74)
                 .addComponent(LblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(180, 180, 180)
-                .addComponent(CmbOpciones, 0, 414, Short.MAX_VALUE)
+                .addComponent(CmbOpciones, 0, 398, Short.MAX_VALUE)
                 .addGap(15, 15, 15))
         );
         jPanel1Layout.setVerticalGroup(
@@ -565,13 +559,12 @@ public class GUIRegistrarEntrada extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbBoxCategoriaActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-       
 
 
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnAgregarPortadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarPortadaActionPerformed
-        
+
     }//GEN-LAST:event_btnAgregarPortadaActionPerformed
 
     private void CmbOpcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CmbOpcionesActionPerformed
@@ -587,15 +580,14 @@ public class GUIRegistrarEntrada extends javax.swing.JFrame {
     }//GEN-LAST:event_txtFechaEntradaActionPerformed
 
     private void BtnBuscarIsbnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarIsbnActionPerformed
-        
+
     }//GEN-LAST:event_BtnBuscarIsbnActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        
+
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        
 
 
     }//GEN-LAST:event_btnCancelarActionPerformed

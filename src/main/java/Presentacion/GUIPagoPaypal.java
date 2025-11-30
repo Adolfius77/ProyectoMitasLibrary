@@ -1,7 +1,5 @@
 package Presentacion;
 
-
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -12,19 +10,13 @@ package Presentacion;
  */
 public class GUIPagoPaypal extends javax.swing.JFrame {
 
-   
-
     /**
      * Creates new form GUIPagoPaypal
      */
-
-
     public GUIPagoPaypal() {
         initComponents();
-        
-    }
 
-    
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -114,9 +106,9 @@ public class GUIPagoPaypal extends javax.swing.JFrame {
                 .addComponent(BtnInicio)
                 .addGap(64, 64, 64)
                 .addComponent(btnCategorias)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 175, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BtnPerfil)
                 .addGap(18, 18, 18)
                 .addComponent(BtnCarrito)
@@ -141,12 +133,12 @@ public class GUIPagoPaypal extends javax.swing.JFrame {
                             .addComponent(CMBOpciones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(BtnPerfil, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(56, 56, 56)
                         .addComponent(btnCategorias)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jPanel3.setBackground(new java.awt.Color(217, 202, 218));
@@ -274,12 +266,12 @@ public class GUIPagoPaypal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void TxtFldCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtFldCorreoActionPerformed
-        
+
     }//GEN-LAST:event_TxtFldCorreoActionPerformed
 
     private void BTNPagarPaypalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNPagarPaypalActionPerformed
-        
-      
+
+
     }//GEN-LAST:event_BTNPagarPaypalActionPerformed
 
     private void BtnInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnInicioActionPerformed
@@ -299,7 +291,7 @@ public class GUIPagoPaypal extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnPerfilActionPerformed
 
     private void TxtFldContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtFldContraseñaActionPerformed
-        
+
     }//GEN-LAST:event_TxtFldContraseñaActionPerformed
 
     private void btnCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriasActionPerformed
@@ -337,8 +329,7 @@ public class GUIPagoPaypal extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                
-               
+
                 new GUIPagoPaypal().setVisible(true);
             }
         });

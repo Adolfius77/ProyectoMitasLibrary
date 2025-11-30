@@ -365,7 +365,7 @@
                       <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
                       <Component id="LblLogo" min="-2" pref="386" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="180" max="-2" attributes="0"/>
-                      <Component id="CmbOpciones" pref="414" max="32767" attributes="0"/>
+                      <Component id="CmbOpciones" pref="398" max="32767" attributes="0"/>
                       <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                   </Group>
               </Group>

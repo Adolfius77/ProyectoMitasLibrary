@@ -163,9 +163,9 @@ public class GUICarrito extends javax.swing.JFrame {
                 .addComponent(BtnInicio)
                 .addGap(47, 47, 47)
                 .addComponent(btnCategorias, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(136, 136, 136)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 122, Short.MAX_VALUE)
+                .addGap(40, 40, 40)
                 .addComponent(BtnPerfil)
                 .addGap(56, 56, 56)
                 .addComponent(BtnCarrito)
@@ -241,6 +241,7 @@ public class GUICarrito extends javax.swing.JFrame {
 
         jLabel6.setBackground(new java.awt.Color(0, 0, 0));
         jLabel6.setFont(new java.awt.Font("Segoe UI Black", 0, 20)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(51, 51, 51));
         jLabel6.setText("TOTAL A PAGAR:");
 
         TxtTotalPagar.setEditable(false);
@@ -318,6 +319,7 @@ public class GUICarrito extends javax.swing.JFrame {
 
         jLabel9.setBackground(new java.awt.Color(0, 0, 0));
         jLabel9.setFont(new java.awt.Font("Segoe UI Black", 0, 20)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("TODOS LOS PRODUCTOS YA TIENEN EL IVA");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);

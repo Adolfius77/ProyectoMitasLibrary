@@ -112,7 +112,7 @@ public class GUIPagInicioGestionLibros extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(txtFldBuscador, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
-                .addComponent(CmbOpciones, 0, 199, Short.MAX_VALUE)
+                .addComponent(CmbOpciones, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(21, 21, 21))
         );
         jPanel1Layout.setVerticalGroup(

@@ -4,30 +4,20 @@
  */
 package Presentacion;
 
-
-
 /**
  *
  * @author emiim
  */
 public class GUIReseñas extends javax.swing.JFrame {
 
-   
-
     /**
      * Creates new form GUIReseñas
      */
     public GUIReseñas() {
-        
+
         initComponents();
-       
 
-        
     }
-
-   
-
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -259,7 +249,7 @@ public class GUIReseñas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnInicio2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnInicio2ActionPerformed
-       
+
     }//GEN-LAST:event_BtnInicio2ActionPerformed
 
     private void CMBCategoriasItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CMBCategoriasItemStateChanged
@@ -267,15 +257,15 @@ public class GUIReseñas extends javax.swing.JFrame {
     }//GEN-LAST:event_CMBCategoriasItemStateChanged
 
     private void CMBCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CMBCategoriasActionPerformed
-        
+
     }//GEN-LAST:event_CMBCategoriasActionPerformed
 
     private void BtnPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPerfilActionPerformed
-        
+
     }//GEN-LAST:event_BtnPerfilActionPerformed
 
     private void BtnCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCarritoActionPerformed
-        
+
     }//GEN-LAST:event_BtnCarritoActionPerformed
 
     private void CMBOpcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CMBOpcionesActionPerformed

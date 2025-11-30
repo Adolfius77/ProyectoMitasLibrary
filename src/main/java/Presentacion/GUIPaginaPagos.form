@@ -109,7 +109,7 @@
                   <Component id="BtnInicio" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
                   <Component id="btnCategorias" min="-2" pref="196" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="472" max="32767" attributes="0"/>
                   <Component id="jLabel2" min="-2" pref="398" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="269" max="-2" attributes="0"/>
                   <Component id="BtnPerfil" min="-2" max="-2" attributes="0"/>

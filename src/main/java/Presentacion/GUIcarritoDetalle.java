@@ -4,8 +4,6 @@
  */
 package Presentacion;
 
-
-
 /**
  *
  * @author adoil
@@ -14,19 +12,10 @@ package Presentacion;
 //soy adolfo no sopas
 public class GUIcarritoDetalle extends javax.swing.JPanel {
 
-    
-
-    
-
     public GUIcarritoDetalle() {
         initComponents();
+
     }
-
-    
-    
-
-   
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -213,11 +202,11 @@ public class GUIcarritoDetalle extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarActionPerformed
-        
+
     }//GEN-LAST:event_BtnEliminarActionPerformed
 
     private void BtnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAgregarActionPerformed
-        
+
     }//GEN-LAST:event_BtnAgregarActionPerformed
 
 

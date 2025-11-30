@@ -4,29 +4,20 @@ package Presentacion;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
-
 /**
  *
  * @author emiim
  */
 public class GUIDetallesLibroEntradas extends javax.swing.JFrame {
 
-    
-
     /**
      * Creates new form GUIDetallesLibro
      */
     public GUIDetallesLibroEntradas() {
-        
+
         initComponents();
-        
+
     }
-
-    
-
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -351,7 +342,7 @@ public class GUIDetallesLibroEntradas extends javax.swing.JFrame {
                 .addGap(31, 31, 31)
                 .addComponent(jLabel23)
                 .addGap(18, 18, 18)
-                .addComponent(CMBOpciones2, 0, 240, Short.MAX_VALUE)
+                .addComponent(CMBOpciones2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
@@ -442,7 +433,7 @@ public class GUIDetallesLibroEntradas extends javax.swing.JFrame {
     }//GEN-LAST:event_CMBCategoriasItemStateChanged
 
     private void CMBCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CMBCategoriasActionPerformed
-        
+
     }//GEN-LAST:event_CMBCategoriasActionPerformed
 
     // Función que hace que te regreses a la categoría en la que estabas
