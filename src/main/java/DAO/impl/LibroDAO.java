@@ -132,7 +132,7 @@ public class LibroDAO implements ILibroDAO {
 
                 libro.setTitulo(doc.getString("titulo"));
                 libro.setAutor(doc.getString("autor"));
-                libro.setPrecio(doc.get("precio") != null ? doc.getDouble("precio") : 0.0);
+                libro.setPrecio(doc.get("precio") != null ? ((Number) doc.get("precio")).doubleValue() : 0.0);
                 libro.setStock(doc.get("stock") != null ? doc.getInteger("stock") : 0);
 
                 String catDesdeBD = doc.getString("categoria");

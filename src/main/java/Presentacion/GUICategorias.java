@@ -100,7 +100,7 @@ public class GUICategorias extends javax.swing.JFrame {
         jLabel6.setText("CATEGORIAS");
 
         CMBCategorias.setFont(new java.awt.Font("Segoe UI Black", 0, 20)); // NOI18N
-        CMBCategorias.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "COCINA", "FANTASIA", "TERROR", "EDUCACION" }));
+        CMBCategorias.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cocina", "Fantasia", "Terror", "Educacion" }));
         CMBCategorias.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 CMBCategoriasItemStateChanged(evt);
