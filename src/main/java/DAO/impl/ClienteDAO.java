@@ -145,12 +145,13 @@ public class ClienteDAO implements IClienteDAO {
     }
 
     @Override
-public java.util.Optional<Model.Cliente> encontrarPorEmail(String email) throws Exception {        try{
+    public java.util.Optional<Model.Cliente> encontrarPorEmail(String email) throws Exception {
+        try {
             List<Cliente> todos = encontrarTodos();
             return todos.stream()
-                    .filter(c-> c.getEmail().equalsIgnoreCase(email))
+                    .filter(c -> c.getEmail().equalsIgnoreCase(email))
                     .findFirst();
-        }catch(MongoException e){
+        } catch (MongoException e) {
             throw new Exception("error al buscar al cliente por email: " + e.getMessage());
         }
     }

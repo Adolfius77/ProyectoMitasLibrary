@@ -27,5 +27,5 @@ public interface IClienteController {
 
     List<Cliente> listarClientes() throws Exception;
 
-    public Model.Cliente autenticar(String email, String password) throws Exception;
+    Cliente autenticar(String email, String password) throws Exception;
 }

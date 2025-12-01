@@ -5,8 +5,14 @@
 package Presentacion;
 
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
+
+import Controllers.IClienteController;
+import Controllers.impl.ClienteController;
+import DAO.IClienteDAO;
+import DAO.impl.ClienteDAO;
+import Model.Cliente;
+import config.SesionUsuario;
 import javax.swing.JOptionPane;
 
 /**
@@ -209,15 +215,40 @@ public class InicioSesion extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegistrarseActionPerformed
 
     private void btnInicioSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicioSesionActionPerformed
-        try{
-            String email = txtCorreo.getText();
-            String pass = new String(contra.getPassword());
-            
-            DAO.IClienteDAO dao = new DAO.impl.ClienteDAO();
-            Controllers.IClienteController controller = new Controllers.impl.ClienteController(dao);
-        }catch(Exception e){
-            
+        try {
+     
+        String email = txtCorreo.getText();
+        String password = new String(contra.getPassword());
+
+        // 2. Validar que no estén vacíos
+        if (email.trim().isEmpty() || password.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor, llena todos los campos.", "Campos Vacíos", JOptionPane.WARNING_MESSAGE);
+            return;
         }
+
+        IClienteDAO dao = new ClienteDAO();
+        IClienteController controller = new ClienteController(dao);
+
+        
+        Cliente clienteEncontrado = controller.autenticar(email, password);
+
+        SesionUsuario.get().setCliente(clienteEncontrado);
+
+        
+        JOptionPane.showMessageDialog(this, "¡Bienvenido/a " + clienteEncontrado.getNombreCompleto() + "!");
+
+       
+        GUIINICIO ventanaInicio = new GUIINICIO();
+        ventanaInicio.setVisible(true);
+
+        
+        this.dispose();
+
+    } catch (Exception e) {
+        
+        JOptionPane.showMessageDialog(this, "Login Fallido: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        System.out.println("Error tecnico: " + e); 
+    }
     }//GEN-LAST:event_btnInicioSesionActionPerformed
 
     private void contraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contraActionPerformed
