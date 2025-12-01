@@ -21,7 +21,7 @@ public class ClienteDAO implements IClienteDAO {
 
     private final MongoCollection<Cliente> col;
 
-    public ClienteDAO(MongoCollection<Cliente> col) {
+    public ClienteDAO() {
         this.col = MongoClientProvider.INSTANCE.getcCollection("clientes", Cliente.class);
     }
 

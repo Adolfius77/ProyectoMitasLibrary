@@ -211,7 +211,9 @@ public class InicioSesion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarseActionPerformed
-        // TODO add your handling code here:
+        Registro registrase = new Registro();
+        registrase.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnRegistrarseActionPerformed
 
     private void btnInicioSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicioSesionActionPerformed
@@ -220,7 +222,7 @@ public class InicioSesion extends javax.swing.JFrame {
         String email = txtCorreo.getText();
         String password = new String(contra.getPassword());
 
-        // 2. Validar que no estén vacíos
+        
         if (email.trim().isEmpty() || password.trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Por favor, llena todos los campos.", "Campos Vacíos", JOptionPane.WARNING_MESSAGE);
             return;
@@ -282,7 +284,7 @@ public class InicioSesion extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        /* Create and display the form */
+        config.MongoClientProvider.INSTANCE.init();
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             @Override

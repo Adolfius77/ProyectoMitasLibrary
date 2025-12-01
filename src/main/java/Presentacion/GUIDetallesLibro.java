@@ -1,34 +1,48 @@
 package Presentacion;
 
+import config.SesionUsuario;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
-
-
 /**
  *
  * @author emiim
  */
 public class GUIDetallesLibro extends javax.swing.JFrame {
 
+    private Model.Libro libroActual;
 
-    
-    /**
-     * Creates new form GUIDetallesLibro
-     */
     public GUIDetallesLibro() {
-       
         initComponents();
-        
     }
-    
-    
-    
-    
 
-    
+    public GUIDetallesLibro(Model.Libro libro) {
+        this.libroActual = libro;
+        initComponents();
+        cargarDatosLibro();
+        setLocationRelativeTo(null);
+
+    }
+
+    private void cargarDatosLibro() {
+        if (libroActual != null) {
+            lblTituloLibro.setText(libroActual.getTitulo());
+            lblTituloLibro1.setText(libroActual.getTitulo());
+            lblAutorLibro.setText(libroActual.getAutor());
+            lblPrecioLibro.setText(String.valueOf(libroActual.getPrecio()));
+            lblCategoriaLibro.setText(libroActual.getCategorias().toString());
+            lblStockLibro.setText(String.valueOf(libroActual.getStock()));
+            lblIsbnLibro.setText(libroActual.getIsbn());
+            lblFechaLanzamientoLibro.setText(libroActual.getFechaLanzamiento().toString());
+            txtAreaSinopsis.setText(libroActual.getSipnosis());
+            lblPortadaLibro.setIcon(new javax.swing.ImageIcon(libroActual.getPortadaUrl()));
+
+        }
+
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -355,40 +369,54 @@ public class GUIDetallesLibro extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
-    
-    
+
+
     private void BtnInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnInicioActionPerformed
-        
+
     }//GEN-LAST:event_BtnInicioActionPerformed
 
     private void CMBCategoriasItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CMBCategoriasItemStateChanged
-        
+
     }//GEN-LAST:event_CMBCategoriasItemStateChanged
 
     private void CMBCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CMBCategoriasActionPerformed
-        
+
     }//GEN-LAST:event_CMBCategoriasActionPerformed
 
     private void BtnPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPerfilActionPerformed
-        
+        GUIPerfil perfil = new GUIPerfil();
+        perfil.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_BtnPerfilActionPerformed
 
     private void BtnCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCarritoActionPerformed
-        
+        GUICarrito carrito = new GUICarrito();
+        carrito.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_BtnCarritoActionPerformed
 
     private void CMBOpcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CMBOpcionesActionPerformed
-        // TODO add your handling code here:
+        String opcion = (String) CMBOpciones.getSelectedItem();
+        if ("Cerrar Sesion".equals(opcion)) {
+            SesionUsuario.get().cerrarSesion();
+            InicioSesion login = new InicioSesion();
+            login.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_CMBOpcionesActionPerformed
 
     // Función que hace que te regreses a la categoría en la que estabas
     private void BtnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRegresarActionPerformed
-
+        GUICategorias categorioas = new GUICategorias();
+        categorioas.setVisible(true);
+        this.dispose();
+        
     }//GEN-LAST:event_BtnRegresarActionPerformed
 
     private void BtnVerReseñasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnVerReseñasActionPerformed
-        // TODO add your handling code here:
+        GUIReseñas resenas = new GUIReseñas();
+        resenas.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_BtnVerReseñasActionPerformed
 
     /**

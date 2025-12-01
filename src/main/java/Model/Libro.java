@@ -4,6 +4,7 @@
  */
 package Model;
 
+import java.util.Date;
 import java.util.List;
 import org.bson.types.ObjectId;
 
@@ -22,8 +23,13 @@ public class Libro {
     private List<String> categorias; 
     private DetalleLibro detalles;
     private List<Resena> resenas;
+    private Date fechaLanzamiento;
+    private String sipnosis;
 
-    public Libro(ObjectId _id, String isbn, String titulo, String autor, double precio, int stock, String portadaUrl, List<String> categorias, DetalleLibro detalles, List<Resena> resenas) {
+    public Libro() {
+    }
+
+    public Libro(ObjectId _id, String isbn, String titulo, String autor, double precio, int stock, String portadaUrl, List<String> categorias, DetalleLibro detalles, List<Resena> resenas, Date fechaLanzamiento, String sipnosis) {
         this._id = _id;
         this.isbn = isbn;
         this.titulo = titulo;
@@ -34,9 +40,8 @@ public class Libro {
         this.categorias = categorias;
         this.detalles = detalles;
         this.resenas = resenas;
-    }
-
-    public Libro() {
+        this.fechaLanzamiento = fechaLanzamiento;
+        this.sipnosis = sipnosis;
     }
 
     public ObjectId getId() {
@@ -118,6 +123,24 @@ public class Libro {
     public void setResenas(List<Resena> resenas) {
         this.resenas = resenas;
     }
+
+    public Date getFechaLanzamiento() {
+        return fechaLanzamiento;
+    }
+
+    public void setFechaLanzamiento(Date fechaLanzamiento) {
+        this.fechaLanzamiento = fechaLanzamiento;
+    }
+
+    public String getSipnosis() {
+        return sipnosis;
+    }
+
+    public void setSipnosis(String sipnosis) {
+        this.sipnosis = sipnosis;
+    }
+
+    
     
     
 }

@@ -12,21 +12,31 @@ package Presentacion;
  */
 
 public class PanelLibro extends javax.swing.JPanel {
-
-    /**
-     * Creates new form PanelLibro
-     *
-     * @param libro
-     */
+private Model.Libro libroActual;
+    
     
 
     public PanelLibro() {
         initComponents();
-
-        
-        
+  
     }
-
+     public PanelLibro(Model.Libro libro) {
+        this.libroActual = libro;
+        cargarDatosLibro();
+        initComponents();
+        
+  
+    }
+    private void cargarDatosLibro(){
+       if(libroActual != null){
+           LblNombreLibro.setText(libroActual.getTitulo());
+           LblPrecio.setText(String.valueOf(libroActual.getPrecio()));
+           LblDisponibildiad.setText(String.valueOf(libroActual.getStock()));
+           lblImagen.setIcon(new javax.swing.ImageIcon(libroActual.getPortadaUrl()));
+           
+           
+       }
+    }
     
 
     
@@ -42,7 +52,7 @@ public class PanelLibro extends javax.swing.JPanel {
 
         PanelLasPruebasDelSol = new javax.swing.JPanel();
         jPanel14 = new javax.swing.JPanel();
-        LblImagenSol = new javax.swing.JLabel();
+        lblImagen = new javax.swing.JLabel();
         LblNombreLibro = new javax.swing.JLabel();
         jPanel24 = new javax.swing.JPanel();
         LblPrecio = new javax.swing.JLabel();
@@ -55,7 +65,7 @@ public class PanelLibro extends javax.swing.JPanel {
 
         jPanel14.setBackground(new java.awt.Color(255, 255, 255));
 
-        LblImagenSol.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/LasPruebasDelSol1.jpg"))); // NOI18N
+        lblImagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/LasPruebasDelSol1.jpg"))); // NOI18N
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
@@ -63,19 +73,19 @@ public class PanelLibro extends javax.swing.JPanel {
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
                 .addContainerGap(132, Short.MAX_VALUE)
-                .addComponent(LblImagenSol, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(110, 110, 110))
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(LblImagenSol, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+                .addComponent(lblImagen, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         LblNombreLibro.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        LblNombreLibro.setText("Las pruebas del sol");
+        LblNombreLibro.setText("Nombre libro");
 
         jPanel24.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -133,16 +143,13 @@ public class PanelLibro extends javax.swing.JPanel {
             .addGroup(PanelLasPruebasDelSolLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addGroup(PanelLasPruebasDelSolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PanelLasPruebasDelSolLayout.createSequentialGroup()
-                        .addGroup(PanelLasPruebasDelSolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(LblDisponibildiad, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(LblNombreLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(13, Short.MAX_VALUE))
+                    .addComponent(LblDisponibildiad, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LblNombreLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(PanelLasPruebasDelSolLayout.createSequentialGroup()
                         .addGap(6, 6, 6)
-                        .addComponent(jPanel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(jPanel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(13, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLasPruebasDelSolLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(PanelLasPruebasDelSolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -203,11 +210,11 @@ public class PanelLibro extends javax.swing.JPanel {
     private javax.swing.JButton BtnAgregarCarrito;
     private javax.swing.JButton BtnDetallesLibro;
     private javax.swing.JLabel LblDisponibildiad;
-    private javax.swing.JLabel LblImagenSol;
     private javax.swing.JLabel LblNombreLibro;
     private javax.swing.JLabel LblPrecio;
     private javax.swing.JPanel PanelLasPruebasDelSol;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel24;
+    private javax.swing.JLabel lblImagen;
     // End of variables declaration//GEN-END:variables
 }

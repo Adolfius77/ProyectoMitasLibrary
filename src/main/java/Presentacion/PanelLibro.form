@@ -113,7 +113,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace pref="132" max="32767" attributes="0"/>
-                      <Component id="LblImagenSol" min="-2" pref="141" max="-2" attributes="0"/>
+                      <Component id="lblImagen" min="-2" pref="141" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="110" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -122,14 +122,14 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="LblImagenSol" pref="198" max="32767" attributes="0"/>
+                      <Component id="lblImagen" pref="198" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="LblImagenSol">
+            <Component class="javax.swing.JLabel" name="lblImagen">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/img/LasPruebasDelSol1.jpg"/>
@@ -143,7 +143,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="24" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Las pruebas del sol"/>
+            <Property name="text" type="java.lang.String" value="Nombre libro"/>
           </Properties>
         </Component>
         <Container class="javax.swing.JPanel" name="jPanel24">
