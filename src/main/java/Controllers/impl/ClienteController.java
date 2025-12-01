@@ -20,10 +20,10 @@ import org.bson.types.ObjectId;
  */
 public class ClienteController implements IClienteController {
 
-    private ClienteDAO clienteDAO;
+    private IClienteDAO clienteDAO;
 
     public ClienteController() {
-        this.clienteDAO = clienteDAO;
+        this.clienteDAO = new ClienteDAO();
     }
 
     @Override

@@ -19,7 +19,7 @@ public class GUIINICIO extends javax.swing.JFrame {
     public GUIINICIO() {
 
         initComponents();
-
+        setLocationRelativeTo(null);
         
     }
 
@@ -852,11 +852,16 @@ public class GUIINICIO extends javax.swing.JFrame {
     }//GEN-LAST:event_CMBOpcionesActionPerformed
 
     private void BtnPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPerfilActionPerformed
-
+        GUIPerfil perfil = new GUIPerfil();
+        perfil.setVisible(true);
+        this.dispose();
+        
     }//GEN-LAST:event_BtnPerfilActionPerformed
 
     private void btnCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriasActionPerformed
-
+        GUICategorias categorias = new GUICategorias();
+        categorias.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnCategoriasActionPerformed
 
     /**
