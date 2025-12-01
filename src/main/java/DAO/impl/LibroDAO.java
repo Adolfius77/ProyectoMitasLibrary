@@ -119,36 +119,12 @@ public class LibroDAO implements ILibroDAO {
 
     @Override
     public List<Libro> obtenerLibrosPorCategoria(String categoria) {
-        List<Libro> listaLibros = new ArrayList<>();
-
-        MongoCursor<Document> cursor = col.withDocumentClass(Document.class)
-                .find(Filters.eq("categoria", categoria))
-                .iterator();
-
         try {
-            while (cursor.hasNext()) {
-                Document doc = cursor.next();
-                Libro libro = new Libro();
-
-                libro.setTitulo(doc.getString("titulo"));
-                libro.setAutor(doc.getString("autor"));
-                libro.setPrecio(doc.get("precio") != null ? ((Number) doc.get("precio")).doubleValue() : 0.0);
-                libro.setStock(doc.get("stock") != null ? doc.getInteger("stock") : 0);
-
-                String catDesdeBD = doc.getString("categoria");
-                if (catDesdeBD != null) {
-                    libro.setCategorias(java.util.Arrays.asList(catDesdeBD));
-                }
-
-                String img = doc.getString("rutaImagen");
-                libro.setPortadaUrl(img != null ? img : "/img/default.png");
-
-                listaLibros.add(libro);
-            }
-        } finally {
-            cursor.close();
+            return col.find(Filters.eq("categorias", categoria)).into(new ArrayList<>());
+            
+        } catch (MongoException e) {
+            System.out.println("Error al obtener libros por categoría: " + e.getMessage());
+            return new ArrayList<>();
         }
-
-        return listaLibros;
     }
 }

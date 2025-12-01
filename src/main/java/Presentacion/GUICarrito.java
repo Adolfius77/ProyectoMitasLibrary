@@ -4,15 +4,14 @@
  */
 package Presentacion;
 
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author USER
  */
 public class GUICarrito extends javax.swing.JFrame {
-
-    
 
     /**
      * Creates new form GUICarrito
@@ -21,11 +20,33 @@ public class GUICarrito extends javax.swing.JFrame {
      */
     public GUICarrito() {
         initComponents();
-        
+        PanelPrueba.setLayout(new javax.swing.BoxLayout(PanelPrueba, javax.swing.BoxLayout.Y_AXIS));
+        cargarItemsCarrito();
+        setLocationRelativeTo(null);
+
     }
 
-    
-    
+    private void cargarItemsCarrito() {
+        PanelPrueba.removeAll();
+        java.util.List<Model.Item> items = config.SesionUsuario.get().getCarrito().getItems();
+
+        double totalPagar = 0.0;
+        int totalArticulos = 0;
+
+        for (Model.Item item : items) {
+            GUIcarritoDetalle tajeta = new GUIcarritoDetalle(item, () -> cargarItemsCarrito());
+
+            PanelPrueba.add(tajeta);
+
+            totalPagar += item.getSubtotal();
+            totalArticulos += item.getCantidad();
+        }
+        lblTotalArticulosValor.setText(String.valueOf(totalArticulos));
+        TxtTotalPagar.setText("$" + String.format("%.2f", totalPagar));
+
+        PanelPrueba.revalidate();
+        PanelPrueba.repaint();
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -384,11 +405,15 @@ public class GUICarrito extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnInicioActionPerformed
-
+        GUIINICIO inicio = new GUIINICIO();
+        inicio.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_BtnInicioActionPerformed
 
     private void BtnCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCarritoActionPerformed
-
+        GUICarrito carrito = new GUICarrito();
+        carrito.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_BtnCarritoActionPerformed
 
     private void CMBOpcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CMBOpcionesActionPerformed
@@ -400,26 +425,32 @@ public class GUICarrito extends javax.swing.JFrame {
     }//GEN-LAST:event_TxtTotalPagarActionPerformed
 
     private void BtnPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPagarActionPerformed
-       
+
     }//GEN-LAST:event_BtnPagarActionPerformed
 
     private void BtnPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPerfilActionPerformed
-
+        GUIPerfil perfil = new GUIPerfil();
+        perfil.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_BtnPerfilActionPerformed
 
     private void btnCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriasActionPerformed
-
+        try {
+            GUICategorias categorias = new GUICategorias();
+            categorias.setVisible(true);
+            this.dispose();
+        } catch (Exception ex) {
+            Logger.getLogger(GUICarrito.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_btnCategoriasActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-      
 
         java.awt.EventQueue.invokeLater(() -> {
-
-           
 
             new GUICarrito().setVisible(true);
         });

@@ -10,33 +10,25 @@ package Model;
  */
 public class Direccion {
 
-        private String alias;
-        private String calle;
-        private String numero;
-        private String colonia;
-        private String ciudad;
-        private String estado;
-        private String cp;
+    private String calle;
+    private String numero;
+    private String colonia;
+    private String ciudad;
+    private String estado;
+    private String cp;
+    private String pais;
 
     public Direccion() {
     }
 
-    public Direccion(String alias, String calle, String numero, String colonia, String ciudad, String estado, String cp) {
-        this.alias = alias;
+    public Direccion(String calle, String numero, String colonia, String ciudad, String estado, String cp, String pais) {
         this.calle = calle;
         this.numero = numero;
         this.colonia = colonia;
         this.ciudad = ciudad;
         this.estado = estado;
         this.cp = cp;
-    }
-
-    public String getAlias() {
-        return alias;
-    }
-
-    public void setAlias(String alias) {
-        this.alias = alias;
+        this.pais = pais;
     }
 
     public String getCalle() {
@@ -87,6 +79,12 @@ public class Direccion {
         this.cp = cp;
     }
 
-        
+    public String getPais() {
+        return pais;
+    }
+
+    public void setPais(String pais) {
+        this.pais = pais;
+    }
     
 }

@@ -14,6 +14,7 @@ public class GUICategorias extends javax.swing.JFrame {
 
     public GUICategorias() throws Exception {
         initComponents();
+        
 
         try {
             libroController = new LibroController(new DAO.impl.LibroDAO());
@@ -26,6 +27,7 @@ public class GUICategorias extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error al iniciar: " + e.getMessage());
         }
+        setLocationRelativeTo(null);
     }
 
     private void cargarLibros(String categoria) throws Exception {

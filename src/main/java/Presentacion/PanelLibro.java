@@ -25,27 +25,41 @@ public class PanelLibro extends javax.swing.JPanel {
     }
 
     public PanelLibro(Model.Libro libro) {
+        initComponents();
         this.libroActual = libro;
         cargarDatosLibro();
-        initComponents();
 
     }
 
     private void cargarDatosLibro() {
         if (libroActual != null) {
             LblNombreLibro.setText(libroActual.getTitulo());
-            LblPrecio.setText(String.valueOf(libroActual.getPrecio()));
-            LblDisponibildiad.setText(String.valueOf(libroActual.getStock()));
-            try {
-                String rutaImagen = "/img/" + libroActual.getTitulo().replace(" ", "") + ".jpg"; 
+            LblPrecio.setText("$" + libroActual.getPrecio()); 
+            lblCantidad.setText(libroActual.getStock() + " disponibles");
 
-                ImageIcon icono = new ImageIcon(getClass().getResource(rutaImagen));
-                if (icono.getImage() != null) {
-                    Image img = icono.getImage().getScaledInstance(100, 150, Image.SCALE_SMOOTH);
+            try {
+
+                String rutaImagen = libroActual.getPortadaUrl();
+
+                if (rutaImagen == null || rutaImagen.isEmpty()) {
+                    rutaImagen = "/img/default.png";
+                }
+
+                java.net.URL imgUrl = getClass().getResource(rutaImagen);
+
+                if (imgUrl != null) {
+                    ImageIcon icono = new ImageIcon(imgUrl);
+                    Image img = icono.getImage().getScaledInstance(141, 198, Image.SCALE_SMOOTH); // Ajusté al tamaño de tu diseño
                     lblImagen.setIcon(new ImageIcon(img));
+                    lblImagen.setText("");
+                } else {
+                    lblImagen.setIcon(null);
+                    lblImagen.setText("Sin imagen");
                 }
             } catch (Exception e) {
-                lblImagen.setText("Sin imagen");
+                lblImagen.setIcon(null);
+                lblImagen.setText("Error img");
+                System.out.println("Error cargando imagen de: " + libroActual.getTitulo());
             }
         }
     }
@@ -59,22 +73,25 @@ public class PanelLibro extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        cantidad = new javax.swing.JLabel();
         PanelLasPruebasDelSol = new javax.swing.JPanel();
         jPanel14 = new javax.swing.JPanel();
         lblImagen = new javax.swing.JLabel();
         LblNombreLibro = new javax.swing.JLabel();
         jPanel24 = new javax.swing.JPanel();
         LblPrecio = new javax.swing.JLabel();
-        LblDisponibildiad = new javax.swing.JLabel();
         BtnAgregarCarrito = new javax.swing.JButton();
         BtnDetallesLibro = new javax.swing.JButton();
+        LblDisponibildiad = new javax.swing.JLabel();
+        lblCantidad = new javax.swing.JLabel();
+
+        cantidad.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        cantidad.setText("Cantidad:");
 
         PanelLasPruebasDelSol.setBackground(new java.awt.Color(217, 202, 218));
         PanelLasPruebasDelSol.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(202, 196, 208), 2));
 
         jPanel14.setBackground(new java.awt.Color(255, 255, 255));
-
-        lblImagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/LasPruebasDelSol1.jpg"))); // NOI18N
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
@@ -122,9 +139,6 @@ public class PanelLibro extends javax.swing.JPanel {
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        LblDisponibildiad.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        LblDisponibildiad.setText("47 disponibles");
-
         BtnAgregarCarrito.setBackground(new java.awt.Color(101, 85, 143));
         BtnAgregarCarrito.setFont(new java.awt.Font("Segoe UI Black", 0, 20)); // NOI18N
         BtnAgregarCarrito.setForeground(new java.awt.Color(255, 255, 255));
@@ -145,26 +159,37 @@ public class PanelLibro extends javax.swing.JPanel {
             }
         });
 
+        LblDisponibildiad.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        LblDisponibildiad.setText("Cantidad:");
+
+        lblCantidad.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lblCantidad.setText("....");
+
         javax.swing.GroupLayout PanelLasPruebasDelSolLayout = new javax.swing.GroupLayout(PanelLasPruebasDelSol);
         PanelLasPruebasDelSol.setLayout(PanelLasPruebasDelSolLayout);
         PanelLasPruebasDelSolLayout.setHorizontalGroup(
             PanelLasPruebasDelSolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelLasPruebasDelSolLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
                 .addGroup(PanelLasPruebasDelSolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(LblDisponibildiad, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LblNombreLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(PanelLasPruebasDelSolLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jPanel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(14, 14, 14)
+                        .addGroup(PanelLasPruebasDelSolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(LblNombreLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(PanelLasPruebasDelSolLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addGroup(PanelLasPruebasDelSolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(PanelLasPruebasDelSolLayout.createSequentialGroup()
+                                        .addComponent(LblDisponibildiad)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(lblCantidad))
+                                    .addComponent(jPanel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(PanelLasPruebasDelSolLayout.createSequentialGroup()
+                        .addGap(88, 88, 88)
+                        .addGroup(PanelLasPruebasDelSolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(BtnDetallesLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(BtnAgregarCarrito))))
                 .addContainerGap(13, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLasPruebasDelSolLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(PanelLasPruebasDelSolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(BtnAgregarCarrito, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(BtnDetallesLibro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(83, 83, 83))
         );
         PanelLasPruebasDelSolLayout.setVerticalGroup(
             PanelLasPruebasDelSolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -175,13 +200,15 @@ public class PanelLibro extends javax.swing.JPanel {
                 .addComponent(LblNombreLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(LblDisponibildiad, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(30, 30, 30)
+                .addGroup(PanelLasPruebasDelSolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LblDisponibildiad, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BtnAgregarCarrito)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BtnDetallesLibro)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -207,7 +234,7 @@ public class PanelLibro extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnAgregarCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAgregarCarritoActionPerformed
-        if (libroActual != null) {
+        if (libroActual == null) {
             JOptionPane.showMessageDialog(this, "Error: No hay libro seleccionado.");
             return;
         }
@@ -229,6 +256,13 @@ public class PanelLibro extends javax.swing.JPanel {
             nuevoItem.setPrecioUnitario(libroActual.getPrecio());
             nuevoItem.setCantidad(1);
             nuevoItem.setSubtotal(libroActual.getPrecio());
+            nuevoItem.setAutor(libroActual.getAutor());
+            nuevoItem.setPortadaURL(libroActual.getPortadaUrl());
+            if(libroActual.getFechaLanzamiento() != null){
+                nuevoItem.setAnio(libroActual.getFechaLanzamiento().getYear() + 1900);
+            }
+        
+            
             items.add(nuevoItem);
         }
         JOptionPane.showMessageDialog(this, "Libro agregado al carrito con exito!");
@@ -246,8 +280,10 @@ public class PanelLibro extends javax.swing.JPanel {
     private javax.swing.JLabel LblNombreLibro;
     private javax.swing.JLabel LblPrecio;
     private javax.swing.JPanel PanelLasPruebasDelSol;
+    private javax.swing.JLabel cantidad;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel24;
+    private javax.swing.JLabel lblCantidad;
     private javax.swing.JLabel lblImagen;
     // End of variables declaration//GEN-END:variables
 }

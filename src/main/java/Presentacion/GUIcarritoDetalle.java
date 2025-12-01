@@ -30,7 +30,7 @@ public class GUIcarritoDetalle extends javax.swing.JPanel {
     private void cargarDatos() {
         lblTituloLibro.setText(itemAsociado.getTitulo());
         lblPrecioLibro.setText(String.valueOf(itemAsociado.getPrecioUnitario()));
-        lblCantidad.setText(String.valueOf(itemAsociado.getCantidad()));
+        cantidadtxt.setText(String.valueOf(itemAsociado.getCantidad()));
         if (itemAsociado.getAutor() != null) {
             lblAutorLibro.setText(itemAsociado.getAutor());
         } else {
