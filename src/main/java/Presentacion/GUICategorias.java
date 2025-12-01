@@ -1,19 +1,43 @@
 package Presentacion;
 
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class GUICategorias extends javax.swing.JFrame {
 
-   
+    private Controllers.impl.LibroController libroController;
 
-    public GUICategorias() {
+    public GUICategorias() throws Exception {
         initComponents();
-       
+
+        libroController = new Controllers.impl.LibroController(new DAO.impl.LibroDAO());
+        PanelDinamico.setLayout(new java.awt.GridLayout(0, 3, 20, 20));
+
+        String categoriaInicial = (String) CMBCategorias.getSelectedItem();
+        cargarLibros(categoriaInicial);
     }
 
-    
+    private void cargarLibros(String categoria) throws Exception {
+        PanelDinamico.removeAll();
 
-    
+        jLabel1.setText(categoria);
+
+        java.util.List<Model.Libro> listaLibros = libroController.listarPorCategoria(categoria);
+
+        if (listaLibros.isEmpty()) {
+            javax.swing.JLabel lblVacio = new javax.swing.JLabel("Sin resultados", javax.swing.SwingConstants.CENTER);
+            PanelDinamico.add(lblVacio);
+        } else {
+            for (Model.Libro libro : listaLibros) {
+                PanelLibro tarjeta = new PanelLibro(libro);
+                PanelDinamico.add(tarjeta);
+            }
+        }
+
+        PanelDinamico.revalidate();
+        PanelDinamico.repaint();
+
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -216,7 +240,7 @@ public class GUICategorias extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnInicioActionPerformed
 
     private void CMBCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CMBCategoriasActionPerformed
-       
+
 
     }//GEN-LAST:event_CMBCategoriasActionPerformed
 
@@ -233,7 +257,14 @@ public class GUICategorias extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnPerfilActionPerformed
 
     private void CMBCategoriasItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CMBCategoriasItemStateChanged
-      
+        if(evt.getStateChange() == java.awt.event.ItemEvent.SELECTED){
+            String categoriaSeleccionada = (String)CMBCategorias.getSelectedItem();
+            try {
+                cargarLibros(categoriaSeleccionada);
+            } catch (Exception ex) {
+                Logger.getLogger(GUICategorias.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_CMBCategoriasItemStateChanged
 
     /**
@@ -269,8 +300,11 @@ public class GUICategorias extends javax.swing.JFrame {
             @Override
             public void run() {
 
-               
-                new GUICategorias().setVisible(true);
+                try {
+                    new GUICategorias().setVisible(true);
+                } catch (Exception ex) {
+                    Logger.getLogger(GUICategorias.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

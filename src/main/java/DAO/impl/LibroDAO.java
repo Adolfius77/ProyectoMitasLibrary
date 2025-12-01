@@ -3,99 +3,108 @@ package DAO.impl;
 // Interfaces del proyecto
 import DAO.ILibroDAO;
 import Model.Libro;
+import com.mongodb.MongoException;
 import config.MongoConfig;
 
 // Librerías de MongoDB Driver
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.model.Filters; // Para usar Filters.eq()
-import org.bson.Document;              // Para manejar los documentos JSON de Mongo
-import org.bson.types.ObjectId;        // Por si necesitas manejar IDs automáticos
+import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.Updates;
+import com.mongodb.client.result.UpdateResult;
+import config.MongoClientProvider;
+import exceptions.DaoException;
+import org.bson.Document;
+import org.bson.types.ObjectId;
 
 // Librerías de Java
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Optional;
 
 public class LibroDAO implements ILibroDAO {
+
     private final MongoCollection<Libro> col;
 
-    public LibroDAO(MongoCollection<Libro> col) {
-        this.col = MongoClientProvider.INSTANCE.getcCollection("libros", Libro.class);
+    public LibroDAO() {
+        this.col = config.MongoClientProvider.INSTANCE.getcCollection("libros", Model.Libro.class);
     }
 
     @Override
     public ObjectId crearLibro(Libro entidad) throws DaoException {
-        try{
-            if(entidad.getId() == null)entidad.setId(new ObjectId());
+        try {
+            if (entidad.getId() == null) {
+                entidad.setId(new ObjectId());
+            }
             col.insertOne(entidad);
             return entidad.getId();
-        }catch (MongoException e){
+        } catch (MongoException e) {
             throw new DaoException("error al crear un libro", e);
         }
     }
 
     @Override
     public Optional<Libro> encontrarPorId(ObjectId _id) throws DaoException {
-        try{
-            return Optional.ofNullable(col.find(Filters.eq("_id",_id)).first());
+        try {
+            return Optional.ofNullable(col.find(Filters.eq("_id", _id)).first());
 
-        }catch (MongoException e){
+        } catch (MongoException e) {
             throw new DaoException("error al encontrar un libro", e);
         }
     }
 
     @Override
     public List<Libro> encontrarTodos() throws DaoException {
-        try{
+        try {
             return col.find().into(new java.util.ArrayList<>());
 
-        }catch (MongoException e){
+        } catch (MongoException e) {
             throw new DaoException("error al encontrar todos los libros", e);
         }
     }
 
     @Override
     public boolean actualizar(Libro entidad) throws DaoException {
-        try{
+        try {
             UpdateResult resultado = col.replaceOne(
                     Filters.eq("_id", entidad.getId()),
                     entidad
             );
             return resultado.getModifiedCount() > 0;
-        }catch (MongoException e){
+        } catch (MongoException e) {
             throw new DaoException("error al actualizar un libro", e);
         }
     }
 
     @Override
     public boolean eliminarPorId(ObjectId _id) throws DaoException {
-        try{
-            var resultado = col.deleteOne(Filters.eq("_id",_id));
-            if(resultado.getDeletedCount() == 0)
+        try {
+            var resultado = col.deleteOne(Filters.eq("_id", _id));
+            if (resultado.getDeletedCount() == 0) {
                 throw new DaoException("libro no existe: " + _id);
+            }
             return true;
-        }catch (MongoException e){
+        } catch (MongoException e) {
             throw new DaoException("error al eliminar un libro", e);
         }
     }
 
     @Override
     public Optional<Libro> encontrarPorTitulo(String titulo) throws DaoException {
-        try{
-            return Optional.ofNullable(col.find(Filters.eq("titulo",titulo)).first());
+        try {
+            return Optional.ofNullable(col.find(Filters.eq("titulo", titulo)).first());
 
-        }catch (MongoException e){
+        } catch (MongoException e) {
             throw new DaoException("error al encontrar un libro", e);
         }
     }
 
     @Override
     public Optional<Libro> encontrarPorISBN(String ISBN) throws DaoException {
-        try{
-            return Optional.ofNullable(col.find(Filters.eq("isbn",ISBN)).first());
-            }catch (MongoException e){
+        try {
+            return Optional.ofNullable(col.find(Filters.eq("isbn", ISBN)).first());
+        } catch (MongoException e) {
             throw new DaoException("error al encontrar un libro", e);
         }
     }
@@ -107,10 +116,39 @@ public class LibroDAO implements ILibroDAO {
                 Updates.inc("stock", -cantidadComprada)
         );
     }
+
     @Override
     public List<Libro> obtenerLibrosPorCategoria(String categoria) {
         List<Libro> listaLibros = new ArrayList<>();
-        MongoCursor<Document> cursor = collection.find(Filters.eq("categoria", categoria)).iterator();
-        
+
+        MongoCursor<Document> cursor = col.withDocumentClass(Document.class)
+                .find(Filters.eq("categoria", categoria))
+                .iterator();
+
+        try {
+            while (cursor.hasNext()) {
+                Document doc = cursor.next();
+                Libro libro = new Libro();
+
+                libro.setTitulo(doc.getString("titulo"));
+                libro.setAutor(doc.getString("autor"));
+                libro.setPrecio(doc.get("precio") != null ? doc.getDouble("precio") : 0.0);
+                libro.setStock(doc.get("stock") != null ? doc.getInteger("stock") : 0);
+
+                String catDesdeBD = doc.getString("categoria");
+                if (catDesdeBD != null) {
+                    libro.setCategorias(java.util.Arrays.asList(catDesdeBD));
+                }
+
+                String img = doc.getString("rutaImagen");
+                libro.setPortadaUrl(img != null ? img : "/img/default.png");
+
+                listaLibros.add(libro);
+            }
+        } finally {
+            cursor.close();
+        }
+
+        return listaLibros;
     }
 }

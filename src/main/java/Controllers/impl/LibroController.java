@@ -16,11 +16,11 @@ import org.bson.types.ObjectId;
  * @author luisb
  */
 public class LibroController implements ILibroController {
-    
+
     private final ILibroDAO libroDAO;
 
     public LibroController(ILibroDAO libroDAO) {
-        this.libroDAO = libroDAO; 
+        this.libroDAO = libroDAO;
     }
 
     @Override
@@ -105,5 +105,13 @@ public class LibroController implements ILibroController {
 
         return libroDAO.encontrarPorISBN(isbn);
     }
-    
+
+    @Override
+    public List<Libro> listarPorCategoria(String categoria) throws Exception {
+        if (categoria == null || categoria.isBlank()) {
+            throw new Exception("la categoria no puede estar vacia");
+        }
+        return libroDAO.obtenerLibrosPorCategoria(categoria);
+    }
+
 }
