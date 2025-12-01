@@ -4,6 +4,9 @@
  */
 package Presentacion;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 /**
  *
@@ -859,9 +862,13 @@ public class GUIINICIO extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnPerfilActionPerformed
 
     private void btnCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriasActionPerformed
-        GUICategorias categorias = new GUICategorias();
-        categorias.setVisible(true);
-        this.dispose();
+        try {
+            GUICategorias categorias = new GUICategorias();
+            categorias.setVisible(true);
+            this.dispose();
+        } catch (Exception ex) {
+            Logger.getLogger(GUIINICIO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnCategoriasActionPerformed
 
     /**

@@ -407,9 +407,17 @@ public class GUIDetallesLibro extends javax.swing.JFrame {
 
     // Función que hace que te regreses a la categoría en la que estabas
     private void BtnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRegresarActionPerformed
-        GUICategorias categorioas = new GUICategorias();
-        categorioas.setVisible(true);
-        this.dispose();
+        try {
+            GUICategorias categorioas = new GUICategorias();
+            categorioas.setVisible(true);
+            this.dispose();
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "No se pudo cargar la ventana de Categorias.\nError: " + e.getMessage(), 
+                "Error de Navegación", 
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
         
     }//GEN-LAST:event_BtnRegresarActionPerformed
 
