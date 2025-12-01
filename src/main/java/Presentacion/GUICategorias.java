@@ -1,41 +1,59 @@
 package Presentacion;
 
+import Controllers.impl.LibroController;
+import Model.Libro;
+import java.awt.GridLayout;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class GUICategorias extends javax.swing.JFrame {
 
-    private Controllers.impl.LibroController libroController;
+    private LibroController libroController;
 
     public GUICategorias() throws Exception {
         initComponents();
 
-        libroController = new Controllers.impl.LibroController(new DAO.impl.LibroDAO());
-        PanelDinamico.setLayout(new java.awt.GridLayout(0, 3, 20, 20));
+        try {
+            libroController = new LibroController(new DAO.impl.LibroDAO());
 
-        String categoriaInicial = (String) CMBCategorias.getSelectedItem();
-        cargarLibros(categoriaInicial);
+            PanelDinamico.setLayout(new GridLayout(0, 3, 20, 20));
+
+            String categoriaInicial = (String) CMBCategorias.getSelectedItem();
+            cargarLibros(categoriaInicial);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al iniciar: " + e.getMessage());
+        }
     }
 
     private void cargarLibros(String categoria) throws Exception {
-        PanelDinamico.removeAll();
+        try {
+            PanelDinamico.removeAll();
 
-        jLabel1.setText(categoria);
+            jLabel1.setText(categoria);
 
-        java.util.List<Model.Libro> listaLibros = libroController.listarPorCategoria(categoria);
+            List<Libro> listaLibros = libroController.listarPorCategoria(categoria);
 
-        if (listaLibros.isEmpty()) {
-            javax.swing.JLabel lblVacio = new javax.swing.JLabel("Sin resultados", javax.swing.SwingConstants.CENTER);
-            PanelDinamico.add(lblVacio);
-        } else {
-            for (Model.Libro libro : listaLibros) {
-                PanelLibro tarjeta = new PanelLibro(libro);
-                PanelDinamico.add(tarjeta);
+            if (listaLibros.isEmpty()) {
+                javax.swing.JLabel lblVacio = new javax.swing.JLabel("No hay libros en esta categoría", javax.swing.SwingConstants.CENTER);
+                lblVacio.setFont(new java.awt.Font("Segoe UI", 1, 18));
+                PanelDinamico.add(lblVacio);
+            } else {
+                for (Libro libro : listaLibros) {
+                    PanelLibro tarjeta = new PanelLibro(libro);
+                    PanelDinamico.add(tarjeta);
+                }
             }
-        }
 
-        PanelDinamico.revalidate();
-        PanelDinamico.repaint();
+            PanelDinamico.revalidate();
+            PanelDinamico.repaint();
+
+        } catch (Exception e) {
+            System.out.println("Error al cargar libros: " + e.getMessage());
+            e.printStackTrace();
+        }
 
     }
 
@@ -242,7 +260,7 @@ public class GUICategorias extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnInicioActionPerformed
 
     private void CMBCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CMBCategoriasActionPerformed
-
+        
 
     }//GEN-LAST:event_CMBCategoriasActionPerformed
 
@@ -263,8 +281,8 @@ public class GUICategorias extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnPerfilActionPerformed
 
     private void CMBCategoriasItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CMBCategoriasItemStateChanged
-        if(evt.getStateChange() == java.awt.event.ItemEvent.SELECTED){
-            String categoriaSeleccionada = (String)CMBCategorias.getSelectedItem();
+        if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED) {
+            String categoriaSeleccionada = (String) CMBCategorias.getSelectedItem();
             try {
                 cargarLibros(categoriaSeleccionada);
             } catch (Exception ex) {
