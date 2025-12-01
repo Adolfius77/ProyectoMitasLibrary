@@ -1,18 +1,22 @@
 package DAO.impl;
 
+// Interfaces del proyecto
 import DAO.ILibroDAO;
 import Model.Libro;
-import com.mongodb.MongoException;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.model.Filters;
-import com.mongodb.client.model.Updates;
-import com.mongodb.client.result.UpdateResult;
-import config.MongoClientProvider;
-import exceptions.DaoException;
-import org.bson.types.ObjectId;
+import config.MongoConfig;
 
+// Librerías de MongoDB Driver
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters; // Para usar Filters.eq()
+import org.bson.Document;              // Para manejar los documentos JSON de Mongo
+import org.bson.types.ObjectId;        // Por si necesitas manejar IDs automáticos
+
+// Librerías de Java
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+
 
 public class LibroDAO implements ILibroDAO {
     private final MongoCollection<Libro> col;
@@ -102,5 +106,11 @@ public class LibroDAO implements ILibroDAO {
                 Filters.eq("_id", new ObjectId(id)),
                 Updates.inc("stock", -cantidadComprada)
         );
+    }
+    @Override
+    public List<Libro> obtenerLibrosPorCategoria(String categoria) {
+        List<Libro> listaLibros = new ArrayList<>();
+        MongoCursor<Document> cursor = collection.find(Filters.eq("categoria", categoria)).iterator();
+        
     }
 }

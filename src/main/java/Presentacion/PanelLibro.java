@@ -6,7 +6,9 @@ package Presentacion;
 
 import Model.Item;
 import config.SesionUsuario;
+import java.awt.Image;
 import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -34,8 +36,17 @@ public class PanelLibro extends javax.swing.JPanel {
             LblNombreLibro.setText(libroActual.getTitulo());
             LblPrecio.setText(String.valueOf(libroActual.getPrecio()));
             LblDisponibildiad.setText(String.valueOf(libroActual.getStock()));
-            lblImagen.setIcon(new javax.swing.ImageIcon(libroActual.getPortadaUrl()));
+            try {
+                String rutaImagen = "/img/" + libroActual.getTitulo().replace(" ", "") + ".jpg"; 
 
+                ImageIcon icono = new ImageIcon(getClass().getResource(rutaImagen));
+                if (icono.getImage() != null) {
+                    Image img = icono.getImage().getScaledInstance(100, 150, Image.SCALE_SMOOTH);
+                    lblImagen.setIcon(new ImageIcon(img));
+                }
+            } catch (Exception e) {
+                lblImagen.setText("Sin imagen");
+            }
         }
     }
 
