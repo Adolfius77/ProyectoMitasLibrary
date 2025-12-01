@@ -4,17 +4,25 @@
  */
 package Presentacion;
 
-
+import Controllers.impl.ClienteController;
+import Model.Cliente;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
-
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import java.io.File;
+import javax.swing.ImageIcon;
+import java.awt.Image;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author adolfo
  */
 public class Registro extends javax.swing.JFrame {
+
+    private String rutaImagenSeleccionada = "";
 
     /**
      * Creates new form InicioSesion
@@ -23,8 +31,6 @@ public class Registro extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
     }
-
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -262,7 +268,36 @@ public class Registro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarseActionPerformed
-        
+
+        String nombre = txtNombres.getText();
+        String apellido = txtApellidos.getText();
+        String correo = txtCorreoElectronico.getText();
+        String pass = new String(password.getPassword());
+
+        if (nombre.isEmpty() || correo.isEmpty() || pass.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor llena todos los campos obligatorios.");
+            return;
+        }
+
+        Cliente nuevoCliente = new Cliente();
+        nuevoCliente.setNombre(nombre);
+        nuevoCliente.setApellidos(apellido);
+        nuevoCliente.setEmail(correo);
+        nuevoCliente.setPassword(pass);
+
+        try {
+            ClienteController controller = new ClienteController();
+            controller.registrarCliente(nuevoCliente);
+
+            JOptionPane.showMessageDialog(this, "¡Registro exitoso! Ahora puedes iniciar sesión.");
+
+            InicioSesion login = new InicioSesion();
+            login.setVisible(true);
+            this.dispose();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al registrar: " + e.getMessage());
+        }
     }//GEN-LAST:event_btnRegistrarseActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -270,11 +305,46 @@ public class Registro extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-       
+        InicioSesion iniciar = new InicioSesion();
+        iniciar.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void btnAgregarFotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarFotoActionPerformed
-        // TODO add your handling code here:
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Seleccionar Portada del Libro");
+
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("Imágenes (JPG, PNG, JPEG)", "jpg", "png", "jpeg");
+        fileChooser.setFileFilter(filtro);
+
+        int resultado = fileChooser.showOpenDialog(this);
+
+        if (resultado == JFileChooser.APPROVE_OPTION) {
+            File archivoSeleccionado = fileChooser.getSelectedFile();
+
+            this.rutaImagenSeleccionada = archivoSeleccionado.getAbsolutePath();
+
+            try {
+
+                ImageIcon iconoOriginal = new ImageIcon(archivoSeleccionado.getAbsolutePath());
+
+                int anchoLabel = lblFotoPerfil.getWidth();
+                int altoLabel = lblFotoPerfil.getHeight();
+
+                if (anchoLabel == 0 || altoLabel == 0) {
+                    anchoLabel = 141;
+                    altoLabel = 198;
+                }
+
+                Image imagenEscalada = iconoOriginal.getImage().getScaledInstance(anchoLabel, altoLabel, Image.SCALE_SMOOTH);
+
+                lblFotoPerfil.setIcon(new ImageIcon(imagenEscalada));
+                lblFotoPerfil.setText("");
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Error al cargar la imagen: " + e.getMessage());
+            }
+        }
     }//GEN-LAST:event_btnAgregarFotoActionPerformed
 
     /**

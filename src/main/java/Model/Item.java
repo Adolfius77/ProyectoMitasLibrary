@@ -15,16 +15,22 @@ public class Item {
     private int cantidad;
     private double precioUnitario;
     private double subtotal;
+    private String autor;
+    private int anio;
+    private String portadaURL;
 
-    public Item(ObjectId libroId, String titulo, int cantidad, double precioUnitario, double subtotal) {
+    public Item() {
+    }
+
+    public Item(ObjectId libroId, String titulo, int cantidad, double precioUnitario, double subtotal, String autor, int anio, String portadaURL) {
         this.libroId = libroId;
         this.titulo = titulo;
         this.cantidad = cantidad;
         this.precioUnitario = precioUnitario;
         this.subtotal = subtotal;
-    }
-
-    public Item() {
+        this.autor = autor;
+        this.anio = anio;
+        this.portadaURL = portadaURL;
     }
 
     public ObjectId getLibroId() {
@@ -66,6 +72,34 @@ public class Item {
     public void setSubtotal(double subtotal) {
         this.subtotal = subtotal;
     }
+
+    public String getAutor() {
+        return autor;
+    }
+
+    public void setAutor(String autor) {
+        this.autor = autor;
+    }
+
+    public int getAnio() {
+        return anio;
+    }
+
+    public void setAnio(int anio) {
+        this.anio = anio;
+    }
+
+    public String getPortadaURL() {
+        return portadaURL;
+    }
+
+    public void setPortadaURL(String portadaURL) {
+        this.portadaURL = portadaURL;
+    }
+
+    
+
+    
     
     
 }

@@ -6,6 +6,7 @@ package Controllers.impl;
 
 import Controllers.IClienteController;
 import DAO.IClienteDAO;
+import DAO.impl.ClienteDAO;
 import Model.Cliente;
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,9 +20,9 @@ import org.bson.types.ObjectId;
  */
 public class ClienteController implements IClienteController {
 
-    private IClienteDAO clienteDAO;
+    private ClienteDAO clienteDAO;
 
-    public ClienteController(IClienteDAO clienteDAO) {
+    public ClienteController() {
         this.clienteDAO = clienteDAO;
     }
 
@@ -32,7 +33,7 @@ public class ClienteController implements IClienteController {
             throw new Exception("El cliente es nulo.");
         }
 
-        if (cliente.getNombreCompleto() == null || cliente.getNombreCompleto().isBlank()) {
+        if (cliente.getNombre() == null || cliente.getNombre().isBlank()) {
             throw new Exception("El nombre del cliente no puede estar vacío.");
         }
 
@@ -50,6 +51,9 @@ public class ClienteController implements IClienteController {
 
         if (cliente.getTelefono() != null && !cliente.getTelefono().matches("\\d{10}")) {
             throw new Exception("El teléfono debe tener 10 dígitos.");
+        }
+        if(cliente.getApellidos() == null ||  cliente.getApellidos().isBlank()){
+            throw new Exception("los apellidos son obligatorios");
         }
 
         if (cliente.getDirecciones() == null) {
@@ -79,7 +83,7 @@ public class ClienteController implements IClienteController {
             throw new Exception("El cliente debe tener un ID para ser actualizado.");
         }
 
-        if (cliente.getNombreCompleto() == null || cliente.getNombreCompleto().isBlank()) {
+        if (cliente.getNombre() == null || cliente.getNombre().isBlank()) {
             throw new Exception("El nombre no puede estar vacío.");
         }
 

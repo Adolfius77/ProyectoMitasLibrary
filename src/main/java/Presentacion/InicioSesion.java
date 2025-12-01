@@ -224,12 +224,12 @@ public class InicioSesion extends javax.swing.JFrame {
 
         
         if (email.trim().isEmpty() || password.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Por favor, llena todos los campos.", "Campos Vacíos", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Por favor, llena todos los campos.", "Campos Vacios", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
         IClienteDAO dao = new ClienteDAO();
-        IClienteController controller = new ClienteController(dao);
+        IClienteController controller = new ClienteController();
 
         
         Cliente clienteEncontrado = controller.autenticar(email, password);
@@ -237,7 +237,7 @@ public class InicioSesion extends javax.swing.JFrame {
         SesionUsuario.get().setCliente(clienteEncontrado);
 
         
-        JOptionPane.showMessageDialog(this, "¡Bienvenido/a " + clienteEncontrado.getNombreCompleto() + "!");
+        JOptionPane.showMessageDialog(this, "¡Bienvenido/a " + clienteEncontrado.getNombre() + "!");
 
        
         GUIINICIO ventanaInicio = new GUIINICIO();

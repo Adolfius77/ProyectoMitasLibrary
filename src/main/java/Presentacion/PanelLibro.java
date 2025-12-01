@@ -4,42 +4,40 @@
  */
 package Presentacion;
 
-
+import Model.Item;
+import config.SesionUsuario;
+import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author adoili
  */
-
 public class PanelLibro extends javax.swing.JPanel {
-private Model.Libro libroActual;
-    
-    
+
+    private Model.Libro libroActual;
 
     public PanelLibro() {
         initComponents();
-  
+
     }
-     public PanelLibro(Model.Libro libro) {
+
+    public PanelLibro(Model.Libro libro) {
         this.libroActual = libro;
         cargarDatosLibro();
         initComponents();
-        
-  
-    }
-    private void cargarDatosLibro(){
-       if(libroActual != null){
-           LblNombreLibro.setText(libroActual.getTitulo());
-           LblPrecio.setText(String.valueOf(libroActual.getPrecio()));
-           LblDisponibildiad.setText(String.valueOf(libroActual.getStock()));
-           lblImagen.setIcon(new javax.swing.ImageIcon(libroActual.getPortadaUrl()));
-           
-           
-       }
-    }
-    
 
-    
+    }
+
+    private void cargarDatosLibro() {
+        if (libroActual != null) {
+            LblNombreLibro.setText(libroActual.getTitulo());
+            LblPrecio.setText(String.valueOf(libroActual.getPrecio()));
+            LblDisponibildiad.setText(String.valueOf(libroActual.getStock()));
+            lblImagen.setIcon(new javax.swing.ImageIcon(libroActual.getPortadaUrl()));
+
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -198,8 +196,32 @@ private Model.Libro libroActual;
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnAgregarCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAgregarCarritoActionPerformed
+        if (libroActual != null) {
+            JOptionPane.showMessageDialog(this, "Error: No hay libro seleccionado.");
+            return;
+        }
+        List<Item> items = SesionUsuario.get().getCarrito().getItems();
 
-    
+        boolean encontrado = false;
+        for (Item item : items) {
+            if (item.getLibroId().equals(libroActual.getId())) {
+                item.setCantidad(item.getCantidad() + 1);
+                item.setSubtotal(item.getCantidad() * item.getPrecioUnitario());
+                encontrado = true;
+                break;
+            }
+        }
+        if (!encontrado) {
+            Item nuevoItem = new Item();
+            nuevoItem.setLibroId(libroActual.getId());
+            nuevoItem.setTitulo(libroActual.getTitulo());
+            nuevoItem.setPrecioUnitario(libroActual.getPrecio());
+            nuevoItem.setCantidad(1);
+            nuevoItem.setSubtotal(libroActual.getPrecio());
+            items.add(nuevoItem);
+        }
+        JOptionPane.showMessageDialog(this, "Libro agregado al carrito con exito!");
+
     }//GEN-LAST:event_BtnAgregarCarritoActionPerformed
 
     private void BtnDetallesLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDetallesLibroActionPerformed

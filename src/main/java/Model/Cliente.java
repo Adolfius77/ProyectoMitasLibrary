@@ -14,7 +14,8 @@ import org.bson.types.ObjectId;
  */
 public class Cliente {
     private ObjectId _id;
-    private String nombreCompleto;
+    private String nombre;
+    private String apellidos;
     private String email;
     private String password;
     private String telefono;
@@ -23,9 +24,13 @@ public class Cliente {
     private List<Direccion> direcciones;
     private List<MetodoPago> metodosPago;
 
-    public Cliente(ObjectId _id, String nombreCompleto, String email, String password, String telefono, String fotoUrl, Date fechaRegistro, List<Direccion> direcciones, List<MetodoPago> metodosPago) {
+    public Cliente() {
+    }
+
+    public Cliente(ObjectId _id, String nombre, String apellidos, String email, String password, String telefono, String fotoUrl, Date fechaRegistro, List<Direccion> direcciones, List<MetodoPago> metodosPago) {
         this._id = _id;
-        this.nombreCompleto = nombreCompleto;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
         this.email = email;
         this.password = password;
         this.telefono = telefono;
@@ -43,12 +48,20 @@ public class Cliente {
         this._id = _id;
     }
 
-    public String getNombreCompleto() {
-        return nombreCompleto;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setNombreCompleto(String nombreCompleto) {
-        this.nombreCompleto = nombreCompleto;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellidos() {
+        return apellidos;
+    }
+
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
     }
 
     public String getEmail() {
@@ -106,6 +119,9 @@ public class Cliente {
     public void setMetodosPago(List<MetodoPago> metodosPago) {
         this.metodosPago = metodosPago;
     }
+
+    
+    
     
     
     

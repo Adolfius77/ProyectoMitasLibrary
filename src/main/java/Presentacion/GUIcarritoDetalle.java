@@ -4,6 +4,11 @@
  */
 package Presentacion;
 
+import Model.Item;
+import config.SesionUsuario;
+import java.util.List;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author adoil
@@ -12,9 +17,39 @@ package Presentacion;
 //soy adolfo no sopas
 public class GUIcarritoDetalle extends javax.swing.JPanel {
 
-    public GUIcarritoDetalle() {
-        initComponents();
+    private Item itemAsociado;
+    private Runnable accionAlActualizar;
 
+    public GUIcarritoDetalle(Item item, Runnable accionAlActualizar) {
+        this.accionAlActualizar = accionAlActualizar;
+        this.itemAsociado = item;
+        initComponents();
+        cargarDatos();
+    }
+
+    private void cargarDatos() {
+        lblTituloLibro.setText(itemAsociado.getTitulo());
+        lblPrecioLibro.setText(String.valueOf(itemAsociado.getPrecioUnitario()));
+        lblCantidad.setText(String.valueOf(itemAsociado.getCantidad()));
+        if (itemAsociado.getAutor() != null) {
+            lblAutorLibro.setText(itemAsociado.getAutor());
+        } else {
+            lblAutorLibro.setText("desconocido");
+        }
+        if (itemAsociado.getAnio() > 0) {
+            LblAnioLibro.setText(String.valueOf(itemAsociado.getAnio()));
+        } else {
+            LblAnioLibro.setText("n/a");
+        }
+        String rutaImagen = itemAsociado.getPortadaURL();
+        if (rutaImagen != null && !rutaImagen.isEmpty()) {
+            try{
+                lblImagen.setIcon(new javax.swing.ImageIcon(getClass().getResource(rutaImagen)));
+                
+            }catch(Exception e){
+                lblImagen.setIcon(new javax.swing.ImageIcon(rutaImagen));
+            }
+        }
     }
 
     /**
@@ -29,13 +64,13 @@ public class GUIcarritoDetalle extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         PanelLasPruebasDelSol = new javax.swing.JPanel();
         jPanel14 = new javax.swing.JPanel();
-        LblImagenSol = new javax.swing.JLabel();
+        lblImagen = new javax.swing.JLabel();
         lblTituloLibro = new javax.swing.JLabel();
         BtnEliminar = new javax.swing.JButton();
         BtnAgregar = new javax.swing.JButton();
         lblAutorLibro = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        lblPrecio = new javax.swing.JLabel();
         lblPrecioLibro = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         lblCantidad = new javax.swing.JLabel();
@@ -51,7 +86,7 @@ public class GUIcarritoDetalle extends javax.swing.JPanel {
         jPanel14.setBackground(new java.awt.Color(255, 255, 255));
         jPanel14.setBorder(new javax.swing.border.MatteBorder(null));
 
-        LblImagenSol.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/LasPruebasDelSol1.jpg"))); // NOI18N
+        lblImagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/LasPruebasDelSol1.jpg"))); // NOI18N
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
@@ -59,14 +94,14 @@ public class GUIcarritoDetalle extends javax.swing.JPanel {
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
                 .addContainerGap(76, Short.MAX_VALUE)
-                .addComponent(LblImagenSol, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(63, 63, 63))
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(LblImagenSol, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+                .addComponent(lblImagen, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -99,8 +134,8 @@ public class GUIcarritoDetalle extends javax.swing.JPanel {
         jLabel4.setFont(new java.awt.Font("Segoe UI Black", 0, 20)); // NOI18N
         jLabel4.setText("titulo:");
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI Black", 0, 20)); // NOI18N
-        jLabel6.setText("Precio:");
+        lblPrecio.setFont(new java.awt.Font("Segoe UI Black", 0, 20)); // NOI18N
+        lblPrecio.setText("Precio:");
 
         lblPrecioLibro.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         lblPrecioLibro.setText("...");
@@ -132,7 +167,7 @@ public class GUIcarritoDetalle extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PanelLasPruebasDelSolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelLasPruebasDelSolLayout.createSequentialGroup()
-                        .addComponent(jLabel6)
+                        .addComponent(lblPrecio)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lblPrecioLibro))
                     .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -172,7 +207,7 @@ public class GUIcarritoDetalle extends javax.swing.JPanel {
                     .addComponent(lblTituloLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PanelLasPruebasDelSolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
+                    .addComponent(lblPrecio)
                     .addComponent(lblPrecioLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PanelLasPruebasDelSolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -202,11 +237,34 @@ public class GUIcarritoDetalle extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarActionPerformed
-
+        int cantidadActual = itemAsociado.getCantidad();
+        if (cantidadActual > 1) {
+            itemAsociado.setCantidad(cantidadActual - 1);
+            itemAsociado.setSubtotal(itemAsociado.getPrecioUnitario() * itemAsociado.getCantidad());
+            cantidadtxt.setText(String.valueOf(itemAsociado.getCantidad()));
+            if (accionAlActualizar != null) {
+                accionAlActualizar.run();
+            }
+        } else {
+            int respuesta = JOptionPane.showConfirmDialog(this,
+                    "¿Eliminar este libro?", "Eliminar", JOptionPane.YES_NO_OPTION);
+            if (respuesta == JOptionPane.YES_OPTION) {
+                List<Item> items = SesionUsuario.get().getCarrito().getItems();
+                items.remove(itemAsociado);
+                if (accionAlActualizar != null) {
+                    accionAlActualizar.run();
+                }
+            }
+        }
     }//GEN-LAST:event_BtnEliminarActionPerformed
 
     private void BtnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAgregarActionPerformed
+        itemAsociado.setCantidad(itemAsociado.getCantidad() + 1);
+        itemAsociado.setSubtotal(itemAsociado.getPrecioUnitario() * itemAsociado.getCantidad());
+        cantidadtxt.setText(String.valueOf(itemAsociado.getCantidad()));
 
+        if (accionAlActualizar != null)
+            accionAlActualizar.run();
     }//GEN-LAST:event_BtnAgregarActionPerformed
 
 
@@ -214,17 +272,17 @@ public class GUIcarritoDetalle extends javax.swing.JPanel {
     private javax.swing.JButton BtnAgregar;
     private javax.swing.JButton BtnEliminar;
     private javax.swing.JLabel LblAnioLibro;
-    private javax.swing.JLabel LblImagenSol;
     private javax.swing.JPanel PanelLasPruebasDelSol;
     private javax.swing.JLabel cantidadtxt;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JLabel lblAutorLibro;
     private javax.swing.JLabel lblCantidad;
+    private javax.swing.JLabel lblImagen;
+    private javax.swing.JLabel lblPrecio;
     private javax.swing.JLabel lblPrecioLibro;
     private javax.swing.JLabel lblTituloLibro;
     // End of variables declaration//GEN-END:variables
