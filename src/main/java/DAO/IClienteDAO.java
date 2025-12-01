@@ -20,5 +20,5 @@ public interface IClienteDAO {
     void agregarDireccion(String clienteId, Direccion direccion) throws DaoException;
     void eliminarDirrecion(String clienteId, Direccion direccion) throws DaoException;
     void agregarMetodoPago(String clienteId, MetodoPago pago) throws DaoException;
-
+    Optional<Cliente> encontrarPorEmail(String email) throws Exception;
 }

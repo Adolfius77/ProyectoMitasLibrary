@@ -19,7 +19,7 @@ public class GUIDetallesLibro extends javax.swing.JFrame {
      * Creates new form GUIDetallesLibro
      */
     public GUIDetallesLibro() {
-        
+       
         initComponents();
         
     }

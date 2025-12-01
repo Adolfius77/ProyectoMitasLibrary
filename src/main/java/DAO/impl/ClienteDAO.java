@@ -18,41 +18,45 @@ import java.util.List;
 import java.util.Optional;
 
 public class ClienteDAO implements IClienteDAO {
-private final MongoCollection<Cliente>col;
+
+    private final MongoCollection<Cliente> col;
+
     public ClienteDAO(MongoCollection<Cliente> col) {
         this.col = MongoClientProvider.INSTANCE.getcCollection("clientes", Cliente.class);
     }
 
     @Override
     public ObjectId registrarCliente(Cliente entidad) throws DaoException {
-        try{
-            if(entidad.getId() == null)entidad.setId(new ObjectId());
+        try {
+            if (entidad.getId() == null) {
+                entidad.setId(new ObjectId());
+            }
             col.insertOne(entidad);
             return entidad.getId();
 
-        }catch (MongoException e){
+        } catch (MongoException e) {
             throw new DaoException("error al registrar un cliente", e);
         }
     }
 
     @Override
-    public Cliente autenticar(String correo, String password)throws DaoException{
+    public Cliente autenticar(String correo, String password) throws DaoException {
         try {
             return col.find(Filters.and(
-                    Filters.eq("correo",correo),
-                    Filters.eq("password",password)
+                    Filters.eq("correo", correo),
+                    Filters.eq("password", password)
             )).first();
-        }catch (MongoException e){
+        } catch (MongoException e) {
             throw new DaoException("error al autenticar un cliente", e);
         }
     }
 
     @Override
     public Optional<Cliente> encontrarPorId(ObjectId _id) throws DaoException {
-        try{
-            return Optional.ofNullable(col.find(Filters.eq("_id",_id)).first());
+        try {
+            return Optional.ofNullable(col.find(Filters.eq("_id", _id)).first());
 
-        }catch (MongoException e){
+        } catch (MongoException e) {
             throw new DaoException("error al encontrar un cliente", e);
 
         }
@@ -60,22 +64,22 @@ private final MongoCollection<Cliente>col;
 
     @Override
     public List<Cliente> encontrarTodos() throws DaoException {
-        try{
+        try {
             return col.find().into(new java.util.ArrayList<>());
-        }catch (MongoException e){
+        } catch (MongoException e) {
             throw new DaoException("error al encontrar todos los clientes", e);
         }
     }
 
     @Override
     public boolean actualizar(Cliente entidad) throws DaoException {
-        try{
+        try {
             UpdateResult resultado = col.replaceOne(
-                    Filters.eq("_id",entidad.getId()),
+                    Filters.eq("_id", entidad.getId()),
                     entidad
             );
             return resultado.getModifiedCount() > 0;
-        }catch (MongoException e){
+        } catch (MongoException e) {
             throw new DaoException("error al actualizar un cliente", e);
 
         }
@@ -83,59 +87,71 @@ private final MongoCollection<Cliente>col;
 
     @Override
     public boolean eliminarPorId(ObjectId _id) throws DaoException {
-       try{
-           var resultado = col.deleteOne(Filters.eq("_id",_id));
-           if(resultado.getDeletedCount()== 0)
-               throw new EntityNotFoundException("cliente no existe: " + _id);
-           return true;
+        try {
+            var resultado = col.deleteOne(Filters.eq("_id", _id));
+            if (resultado.getDeletedCount() == 0) {
+                throw new EntityNotFoundException("cliente no existe: " + _id);
+            }
+            return true;
 
-       }catch (MongoException e){
-           throw new DaoException("error al eliminar un cliente", e);
-       }
+        } catch (MongoException e) {
+            throw new DaoException("error al eliminar un cliente", e);
+        }
     }
 
     @Override
     public Optional<Cliente> encontrarPorNombre(String nombre) throws DaoException {
-        try{
-            return Optional.ofNullable(col.find(Filters.eq("nomnbre",nombre)).first());
-        }catch (MongoException e){
+        try {
+            return Optional.ofNullable(col.find(Filters.eq("nomnbre", nombre)).first());
+        } catch (MongoException e) {
             throw new DaoException("error al encontrar un cliente", e);
         }
     }
 
     @Override
     public void agregarDireccion(String clienteId, Direccion direccion) throws DaoException {
-        try{
+        try {
             col.updateOne(
                     Filters.eq("_id", new ObjectId(clienteId)),
-                    Updates.push("dirrecciones",direccion)
+                    Updates.push("dirrecciones", direccion)
             );
-        }catch (MongoException e){
+        } catch (MongoException e) {
             throw new DaoException("error al agregar una direccion", e);
         }
     }
 
     @Override
     public void eliminarDirrecion(String clienteId, Direccion direccion) throws DaoException {
-        try{
+        try {
             col.updateOne(
                     Filters.eq("_id", new ObjectId(clienteId)),
-                    Updates.pull("dirrecciones",direccion)
+                    Updates.pull("dirrecciones", direccion)
             );
-        }catch (MongoException e){
+        } catch (MongoException e) {
             throw new DaoException("error al agregar una direccion", e);
         }
     }
 
     @Override
     public void agregarMetodoPago(String clienteId, MetodoPago pago) throws DaoException {
-          try{
-              col.updateOne(
-                      Filters.eq("_id",new ObjectId(clienteId)),
-                      Updates.push("metodosPago",pago)
-              );
-          }catch (MongoException e){
-              throw new DaoException("error al agregar un metodo de pago", e);
-          }
+        try {
+            col.updateOne(
+                    Filters.eq("_id", new ObjectId(clienteId)),
+                    Updates.push("metodosPago", pago)
+            );
+        } catch (MongoException e) {
+            throw new DaoException("error al agregar un metodo de pago", e);
+        }
+    }
+
+    @Override
+public java.util.Optional<Model.Cliente> encontrarPorEmail(String email) throws Exception {        try{
+            List<Cliente> todos = encontrarTodos();
+            return todos.stream()
+                    .filter(c-> c.getEmail().equalsIgnoreCase(email))
+                    .findFirst();
+        }catch(MongoException e){
+            throw new Exception("error al buscar al cliente por email: " + e.getMessage());
+        }
     }
 }

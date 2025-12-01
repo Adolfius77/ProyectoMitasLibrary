@@ -209,7 +209,15 @@ public class InicioSesion extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegistrarseActionPerformed
 
     private void btnInicioSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicioSesionActionPerformed
-       
+        try{
+            String email = txtCorreo.getText();
+            String pass = new String(contra.getPassword());
+            
+            DAO.IClienteDAO dao = new DAO.impl.ClienteDAO();
+            Controllers.IClienteController controller = new Controllers.impl.ClienteController(dao);
+        }catch(Exception e){
+            
+        }
     }//GEN-LAST:event_btnInicioSesionActionPerformed
 
     private void contraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contraActionPerformed
