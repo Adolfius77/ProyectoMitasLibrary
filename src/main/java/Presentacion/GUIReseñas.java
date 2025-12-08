@@ -4,7 +4,14 @@
  */
 package Presentacion;
 
+import DAO.impl.LibroDAO;
+import Model.Cliente;
 import Model.Libro;
+import Model.Resena;
+import config.SesionUsuario;
+import java.util.ArrayList;
+import java.util.Date;
+import javax.swing.BoxLayout;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,6 +21,8 @@ import javax.swing.JOptionPane;
 public class GUIReseñas extends javax.swing.JFrame {
 
     private Libro libroActual;
+    private LibroDAO libroDAO = new LibroDAO();
+    
 
     public GUIReseñas() {
         initComponents();
@@ -22,8 +31,23 @@ public class GUIReseñas extends javax.swing.JFrame {
     public GUIReseñas(Libro libro) {
         this.libroActual = libro;
         initComponents();
+        
+        panelReseñas.setLayout(new BoxLayout(panelReseñas,BoxLayout.Y_AXIS));
+        actualizarListaResenas();
         cargarDatosLibro();
         setLocationRelativeTo(null);
+    }
+    private void actualizarListaResenas(){
+        panelReseñas.removeAll();
+        
+        if(libroActual != null && libroActual.getResenas() != null){
+            for(Resena r : libroActual.getResenas()){
+                formResenas ficha = new formResenas(r);
+                panelReseñas.add(ficha);
+            }
+        }
+        panelReseñas.revalidate();
+        panelReseñas.repaint();
     }
     private void cargarDatosLibro(){
         lblTituloLibro.setText(libroActual.getTitulo());
@@ -277,12 +301,35 @@ public class GUIReseñas extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnRegresarADetallesActionPerformed
 
     private void BtnAgregarReseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAgregarReseñaActionPerformed
-//        String nuevaResenaTexto = JOptionPane.showInputDialog(
-//                            this,
-//                            "Escribe tu reseña para: " + libroConResenas.getTitulo(),
-//                            "Agregar Nueva Reseña",
-//                            JOptionPane.PLAIN_MESSAGE
-//                    );
+        if(SesionUsuario.get().getCliente()== null){
+            JOptionPane.showMessageDialog(this, "iniciar sesion para opinar pa");
+            return;
+        }
+        String usuario = SesionUsuario.get().getCliente().getNombre();
+        
+        int resp = JOptionPane.showConfirmDialog(this, "quieres hacer una reseña? ", "nueva resena", JOptionPane.YES_NO_OPTION);
+        
+        if(resp == JOptionPane.YES_OPTION){
+            String texto = JOptionPane.showInputDialog(this,"escribe tu opion: ");
+            if(texto == null || texto.trim().isEmpty())return;
+            
+            String calificacion = JOptionPane.showInputDialog(this, "calificacion del 1 al 5");
+            int calif = 5;
+            try{ calif = Integer.parseInt(calificacion);}catch(Exception e){}
+            
+            Resena resena = new Resena(usuario, calif, texto, new Date());
+            
+            if(libroActual.getResenas() == null)libroActual.setResenas(new ArrayList<>());
+            libroActual.getResenas().add(resena);
+            
+            try{
+                libroDAO.actualizar(libroActual);
+                actualizarListaResenas();
+                JOptionPane.showMessageDialog(this, "la resena a sido agregada correctamente");
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(this, "error al guardar resena" + e.getMessage());
+            }
+        }
     }//GEN-LAST:event_BtnAgregarReseñaActionPerformed
 
     /**
