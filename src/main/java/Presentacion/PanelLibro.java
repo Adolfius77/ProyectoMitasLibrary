@@ -5,6 +5,7 @@
 package Presentacion;
 
 import Model.Item;
+import Model.Libro;
 import config.SesionUsuario;
 import java.awt.Image;
 import java.util.List;
@@ -34,7 +35,7 @@ public class PanelLibro extends javax.swing.JPanel {
     private void cargarDatosLibro() {
         if (libroActual != null) {
             LblNombreLibro.setText(libroActual.getTitulo());
-            LblPrecio.setText("$" + libroActual.getPrecio()); 
+            LblPrecio.setText("$" + libroActual.getPrecio());
             lblCantidad.setText(libroActual.getStock() + " disponibles");
 
             try {
@@ -258,19 +259,27 @@ public class PanelLibro extends javax.swing.JPanel {
             nuevoItem.setSubtotal(libroActual.getPrecio());
             nuevoItem.setAutor(libroActual.getAutor());
             nuevoItem.setPortadaURL(libroActual.getPortadaUrl());
-            if(libroActual.getFechaLanzamiento() != null){
+            if (libroActual.getFechaLanzamiento() != null) {
                 nuevoItem.setAnio(libroActual.getFechaLanzamiento().getYear() + 1900);
             }
-        
-            
+
             items.add(nuevoItem);
         }
         JOptionPane.showMessageDialog(this, "Libro agregado al carrito con exito!");
 
     }//GEN-LAST:event_BtnAgregarCarritoActionPerformed
+    private void navegarDetalles(Libro libroSeleccionado) {
+        if (libroSeleccionado != null) {
+            GUIDetallesLibro detalles = new GUIDetallesLibro(libroSeleccionado);
+            detalles.setVisible(true);
+            javax.swing.SwingUtilities.getWindowAncestor(this).dispose();
+        }else{
+            System.out.println("error el libro seleccionado es nulo");
+        }
 
+    }
     private void BtnDetallesLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDetallesLibroActionPerformed
-
+        navegarDetalles(libroActual);
     }//GEN-LAST:event_BtnDetallesLibroActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

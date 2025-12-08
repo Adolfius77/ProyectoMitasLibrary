@@ -28,19 +28,59 @@ public class GUIDetallesLibro extends javax.swing.JFrame {
 
     private void cargarDatosLibro() {
         if (libroActual != null) {
+            //titulo libro parte de arriba
             lblTituloLibro.setText(libroActual.getTitulo());
+            //titulo libro parte de abajo
             lblTituloLibro1.setText(libroActual.getTitulo());
-            lblAutorLibro.setText(libroActual.getAutor());
-            lblPrecioLibro.setText(String.valueOf(libroActual.getPrecio()));
-            lblCategoriaLibro.setText(libroActual.getCategorias().toString());
-            lblStockLibro.setText(String.valueOf(libroActual.getStock()));
-            lblIsbnLibro.setText(libroActual.getIsbn());
-            lblFechaLanzamientoLibro.setText(libroActual.getFechaLanzamiento().toString());
+            //autor del libro
+            lblAutor.setText(libroActual.getAutor());
+            //precio del libro
+            lblPrecio.setText(String.valueOf(libroActual.getPrecio()));
+            //categoria libro
+            lblCategoria.setText(libroActual.getCategorias().toString());
+            //stock del libro
+            lblStock.setText(String.valueOf(libroActual.getStock()));
+            //ISBN del libro
+            lblIsbn.setText(libroActual.getIsbn());
+            //fecha del lanzamiento del libro
+            lblFecha.setText(libroActual.getFechaLanzamiento().toString());
+            //sipnosis del libro
             txtAreaSinopsis.setText(libroActual.getSipnosis());
-            lblPortadaLibro.setIcon(new javax.swing.ImageIcon(libroActual.getPortadaUrl()));
+            //portada del libro
+            String rutaImagen = libroActual.getPortadaUrl();
+            if (rutaImagen != null && !rutaImagen.isBlank()) {
+                try {
+                    javax.swing.ImageIcon icon = null;
 
+                    java.net.URL urlImagen = getClass().getResource(rutaImagen);
+                    if (urlImagen != null) {
+                        icon = new javax.swing.ImageIcon(urlImagen);
+                    } else {
+
+                        icon = new javax.swing.ImageIcon(rutaImagen);
+                    }
+
+                    if (icon != null && icon.getImage() != null) {
+                        java.awt.Image img = icon.getImage();
+
+                        int ancho = lblPortadaLibro.getWidth() > 0 ? lblPortadaLibro.getWidth() : 150;
+                        int alto = lblPortadaLibro.getHeight() > 0 ? lblPortadaLibro.getHeight() : 200;
+
+                        java.awt.Image imgEscalada = img.getScaledInstance(ancho, alto, java.awt.Image.SCALE_SMOOTH);
+                        lblPortadaLibro.setIcon(new javax.swing.ImageIcon(imgEscalada));
+                    }
+
+                } catch (Exception e) {
+                    System.out.println("Error cargando imagen: " + e.getMessage());
+                    lblPortadaLibro.setText("Sin imagen");
+                }
+            } else {
+                lblPortadaLibro.setIcon(null);
+                lblPortadaLibro.setText("Sin imagen");
+            }
         }
-
+        //numero de paginas del libro
+        lblPaginas.setText(String.valueOf(libroActual.getDetalles().getNumeroPaginas()));
     }
 
     /**
@@ -52,33 +92,67 @@ public class GUIDetallesLibro extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel3 = new javax.swing.JPanel();
+        CMBCategorias = new javax.swing.JComboBox<>();
         jPanel1 = new javax.swing.JPanel();
         BtnInicio = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        CMBCategorias = new javax.swing.JComboBox<>();
         BtnPerfil = new javax.swing.JButton();
         BtnCarrito = new javax.swing.JButton();
         jLabel21 = new javax.swing.JLabel();
         CMBOpciones = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        lblPortadaLibro = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtAreaSinopsis = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        lblTituloLibro = new javax.swing.JLabel();
-        lblAutorLibro = new javax.swing.JLabel();
-        lblNumPaginasLibro = new javax.swing.JLabel();
-        lblPrecioLibro = new javax.swing.JLabel();
-        lblCategoriaLibro = new javax.swing.JLabel();
-        lblStockLibro = new javax.swing.JLabel();
-        lblIsbnLibro = new javax.swing.JLabel();
-        lblFechaLanzamientoLibro = new javax.swing.JLabel();
         BtnRegresar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         lblTituloLibro1 = new javax.swing.JLabel();
         BtnVerReseñas = new javax.swing.JButton();
+        AutorLibro = new javax.swing.JLabel();
+        CategoriaLibro = new javax.swing.JLabel();
+        NumPaginasLibro = new javax.swing.JLabel();
+        PrecioLibro = new javax.swing.JLabel();
+        StockLibro = new javax.swing.JLabel();
+        IsbnLibro = new javax.swing.JLabel();
+        FechaLanzamientoLibro = new javax.swing.JLabel();
+        lblTituloLibro = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        lblPortadaLibro = new javax.swing.JLabel();
+        lblAutor = new javax.swing.JLabel();
+        lblCategoria = new javax.swing.JLabel();
+        lblStock = new javax.swing.JLabel();
+        lblIsbn = new javax.swing.JLabel();
+        lblPaginas = new javax.swing.JLabel();
+        lblFecha = new javax.swing.JLabel();
+        lblPrecio = new javax.swing.JLabel();
+
+        jPanel3.setBackground(new java.awt.Color(217, 202, 218));
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 227, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 298, Short.MAX_VALUE)
+        );
+
+        CMBCategorias.setFont(new java.awt.Font("Segoe UI Black", 0, 20)); // NOI18N
+        CMBCategorias.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "COCINA", "FANTASIA", "TERROR", "EDUCACION" }));
+        CMBCategorias.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                CMBCategoriasItemStateChanged(evt);
+            }
+        });
+        CMBCategorias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CMBCategoriasActionPerformed(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -95,19 +169,6 @@ public class GUIDetallesLibro extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Segoe UI Black", 0, 25)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("CATEGORIAS");
-
-        CMBCategorias.setFont(new java.awt.Font("Segoe UI Black", 0, 20)); // NOI18N
-        CMBCategorias.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "COCINA", "FANTASIA", "TERROR", "EDUCACION" }));
-        CMBCategorias.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                CMBCategoriasItemStateChanged(evt);
-            }
-        });
-        CMBCategorias.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CMBCategoriasActionPerformed(evt);
-            }
-        });
 
         BtnPerfil.setBackground(new java.awt.Color(101, 85, 143));
         BtnPerfil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/usuario.png"))); // NOI18N
@@ -148,19 +209,17 @@ public class GUIDetallesLibro extends javax.swing.JFrame {
                 .addComponent(BtnInicio)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(CMBCategorias, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(137, 137, 137)
+                .addGap(74, 74, 74)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 217, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BtnPerfil)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(BtnCarrito)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel21)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CMBOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -168,18 +227,15 @@ public class GUIDetallesLibro extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(CMBCategorias, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(29, 29, 29))
+                        .addComponent(jLabel6)
+                        .addGap(31, 31, 31))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(BtnInicio)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(BtnCarrito, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(CMBOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel21, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(BtnPerfil, javax.swing.GroupLayout.Alignment.LEADING)))
+                            .addComponent(BtnCarrito)
+                            .addComponent(jLabel21)
+                            .addComponent(BtnPerfil)
+                            .addComponent(CMBOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(19, 19, 19))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -188,83 +244,15 @@ public class GUIDetallesLibro extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(217, 202, 218));
 
-        lblPortadaLibro.setText("Imagen");
-
+        txtAreaSinopsis.setBackground(new java.awt.Color(255, 255, 255));
         txtAreaSinopsis.setColumns(20);
         txtAreaSinopsis.setRows(5);
         jScrollPane1.setViewportView(txtAreaSinopsis);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Black", 0, 36)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Sinopsis");
         jLabel2.setToolTipText("");
-
-        jPanel3.setBackground(new java.awt.Color(217, 202, 218));
-
-        lblTituloLibro.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
-        lblTituloLibro.setText("Nombre Libro");
-
-        lblAutorLibro.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblAutorLibro.setText("Autor/a");
-
-        lblNumPaginasLibro.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblNumPaginasLibro.setText("Paginas");
-
-        lblPrecioLibro.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblPrecioLibro.setText("Precio");
-
-        lblCategoriaLibro.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblCategoriaLibro.setText("Categoria");
-
-        lblStockLibro.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblStockLibro.setText("Stock");
-
-        lblIsbnLibro.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblIsbnLibro.setText("ISBN");
-
-        lblFechaLanzamientoLibro.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblFechaLanzamientoLibro.setText("Publicacion");
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(34, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblFechaLanzamientoLibro)
-                    .addComponent(lblIsbnLibro)
-                    .addComponent(lblStockLibro)
-                    .addComponent(lblCategoriaLibro)
-                    .addComponent(lblAutorLibro)
-                    .addComponent(lblNumPaginasLibro)
-                    .addComponent(lblPrecioLibro))
-                .addGap(99, 99, 99))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(lblTituloLibro)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblTituloLibro)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblAutorLibro)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblCategoriaLibro)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblNumPaginasLibro)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblPrecioLibro)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblStockLibro)
-                .addGap(12, 12, 12)
-                .addComponent(lblIsbnLibro)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblFechaLanzamientoLibro)
-                .addContainerGap(24, Short.MAX_VALUE))
-        );
 
         BtnRegresar.setBackground(new java.awt.Color(101, 85, 143));
         BtnRegresar.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
@@ -277,9 +265,11 @@ public class GUIDetallesLibro extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Detalles del libro:");
 
         lblTituloLibro1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        lblTituloLibro1.setForeground(new java.awt.Color(0, 0, 0));
         lblTituloLibro1.setText("Nombre Libro");
 
         BtnVerReseñas.setBackground(new java.awt.Color(101, 85, 143));
@@ -291,6 +281,88 @@ public class GUIDetallesLibro extends javax.swing.JFrame {
                 BtnVerReseñasActionPerformed(evt);
             }
         });
+
+        AutorLibro.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        AutorLibro.setForeground(new java.awt.Color(0, 0, 0));
+        AutorLibro.setText("Autor/a:");
+
+        CategoriaLibro.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        CategoriaLibro.setForeground(new java.awt.Color(0, 0, 0));
+        CategoriaLibro.setText("Categoria:");
+
+        NumPaginasLibro.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        NumPaginasLibro.setForeground(new java.awt.Color(0, 0, 0));
+        NumPaginasLibro.setText("Paginas:");
+
+        PrecioLibro.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        PrecioLibro.setForeground(new java.awt.Color(0, 0, 0));
+        PrecioLibro.setText("Precio:");
+
+        StockLibro.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        StockLibro.setForeground(new java.awt.Color(0, 0, 0));
+        StockLibro.setText("Stock:");
+
+        IsbnLibro.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        IsbnLibro.setForeground(new java.awt.Color(0, 0, 0));
+        IsbnLibro.setText("ISBN:");
+
+        FechaLanzamientoLibro.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        FechaLanzamientoLibro.setForeground(new java.awt.Color(0, 0, 0));
+        FechaLanzamientoLibro.setText("Publicacion:");
+
+        lblTituloLibro.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
+        lblTituloLibro.setForeground(new java.awt.Color(0, 0, 0));
+        lblTituloLibro.setText("Nombre Libro");
+
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+
+        lblPortadaLibro.setForeground(new java.awt.Color(0, 0, 0));
+        lblPortadaLibro.setText("Imagen");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(lblPortadaLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(lblPortadaLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
+
+        lblAutor.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblAutor.setForeground(new java.awt.Color(0, 0, 0));
+        lblAutor.setText("jLabel4");
+
+        lblCategoria.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblCategoria.setForeground(new java.awt.Color(0, 0, 0));
+        lblCategoria.setText("jLabel5");
+
+        lblStock.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblStock.setForeground(new java.awt.Color(0, 0, 0));
+        lblStock.setText("jLabel7");
+
+        lblIsbn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblIsbn.setForeground(new java.awt.Color(0, 0, 0));
+        lblIsbn.setText("jLabel8");
+
+        lblPaginas.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblPaginas.setForeground(new java.awt.Color(0, 0, 0));
+        lblPaginas.setText("jLabel9");
+
+        lblFecha.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblFecha.setForeground(new java.awt.Color(0, 0, 0));
+        lblFecha.setText("jLabel10");
+
+        lblPrecio.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblPrecio.setForeground(new java.awt.Color(0, 0, 0));
+        lblPrecio.setText("jLabel11");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -304,67 +376,119 @@ public class GUIDetallesLibro extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lblTituloLibro1))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(1043, 1043, 1043)
-                        .addComponent(BtnVerReseñas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(135, 135, 135))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(200, 200, 200))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(69, 69, 69)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(BtnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(lblPortadaLibro)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 605, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49))
+                        .addGap(47, 47, 47)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(lblTituloLibro)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(StockLibro)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(lblStock, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(PrecioLibro)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(lblPrecio))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(AutorLibro)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(lblAutor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(CategoriaLibro)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(lblCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(FechaLanzamientoLibro)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(lblFecha))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(NumPaginasLibro)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(lblPaginas, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(IsbnLibro)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(lblIsbn, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(BtnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(23, 23, 23)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(BtnVerReseñas, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(90, 90, 90)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(lblTituloLibro1))
-                        .addGap(166, 166, 166)
-                        .addComponent(lblPortadaLibro)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BtnVerReseñas)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(90, 90, 90)
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(19, 19, 19)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel1)
+                                    .addComponent(lblTituloLibro1))
+                                .addGap(66, 66, 66)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(lblTituloLibro)
+                                        .addGap(21, 21, 21)
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(AutorLibro)
+                                            .addComponent(lblAutor))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(CategoriaLibro)
+                                            .addComponent(lblCategoria))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(StockLibro)
+                                            .addComponent(lblStock))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(IsbnLibro)
+                                            .addComponent(lblIsbn))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(NumPaginasLibro)
+                                            .addComponent(lblPaginas))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(FechaLanzamientoLibro)
+                                            .addComponent(lblFecha))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(PrecioLibro)
+                                            .addComponent(lblPrecio)))
+                                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(18, 18, 18)
+                        .addComponent(BtnVerReseñas, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(BtnRegresar))
-                .addGap(44, 44, 44))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -412,13 +536,13 @@ public class GUIDetallesLibro extends javax.swing.JFrame {
             categorioas.setVisible(true);
             this.dispose();
         } catch (Exception e) {
-            javax.swing.JOptionPane.showMessageDialog(this, 
-                "No se pudo cargar la ventana de Categorias.\nError: " + e.getMessage(), 
-                "Error de Navegación", 
-                javax.swing.JOptionPane.ERROR_MESSAGE);
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "No se pudo cargar la ventana de Categorias.\nError: " + e.getMessage(),
+                    "Error de Navegación",
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         }
-        
+
     }//GEN-LAST:event_BtnRegresarActionPerformed
 
     private void BtnVerReseñasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnVerReseñasActionPerformed
@@ -458,12 +582,13 @@ public class GUIDetallesLibro extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-//                new GUIDetallesLibro().setVisible(true);
+                new GUIDetallesLibro().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel AutorLibro;
     private javax.swing.JButton BtnCarrito;
     private javax.swing.JButton BtnInicio;
     private javax.swing.JButton BtnPerfil;
@@ -471,6 +596,12 @@ public class GUIDetallesLibro extends javax.swing.JFrame {
     private javax.swing.JButton BtnVerReseñas;
     private javax.swing.JComboBox<String> CMBCategorias;
     private javax.swing.JComboBox<String> CMBOpciones;
+    private javax.swing.JLabel CategoriaLibro;
+    private javax.swing.JLabel FechaLanzamientoLibro;
+    private javax.swing.JLabel IsbnLibro;
+    private javax.swing.JLabel NumPaginasLibro;
+    private javax.swing.JLabel PrecioLibro;
+    private javax.swing.JLabel StockLibro;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel21;
@@ -479,15 +610,16 @@ public class GUIDetallesLibro extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblAutorLibro;
-    private javax.swing.JLabel lblCategoriaLibro;
-    private javax.swing.JLabel lblFechaLanzamientoLibro;
-    private javax.swing.JLabel lblIsbnLibro;
-    private javax.swing.JLabel lblNumPaginasLibro;
+    private javax.swing.JLabel lblAutor;
+    private javax.swing.JLabel lblCategoria;
+    private javax.swing.JLabel lblFecha;
+    private javax.swing.JLabel lblIsbn;
+    private javax.swing.JLabel lblPaginas;
     private javax.swing.JLabel lblPortadaLibro;
-    private javax.swing.JLabel lblPrecioLibro;
-    private javax.swing.JLabel lblStockLibro;
+    private javax.swing.JLabel lblPrecio;
+    private javax.swing.JLabel lblStock;
     private javax.swing.JLabel lblTituloLibro;
     private javax.swing.JLabel lblTituloLibro1;
     private javax.swing.JTextArea txtAreaSinopsis;

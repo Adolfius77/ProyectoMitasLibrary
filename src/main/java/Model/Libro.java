@@ -25,6 +25,7 @@ public class Libro {
     private List<Resena> resenas;
     private Date fechaLanzamiento;
     private String sipnosis;
+    
 
     public Libro() {
     }
