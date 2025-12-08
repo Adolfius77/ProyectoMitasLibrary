@@ -16,6 +16,7 @@ public class GUIDetallesLibro extends javax.swing.JFrame {
 
     public GUIDetallesLibro() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     public GUIDetallesLibro(Model.Libro libro) {
@@ -496,7 +497,9 @@ public class GUIDetallesLibro extends javax.swing.JFrame {
 
 
     private void BtnInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnInicioActionPerformed
-
+        GUIINICIO inicio = new GUIINICIO();
+        inicio.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_BtnInicioActionPerformed
 
     private void CMBCategoriasItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CMBCategoriasItemStateChanged
@@ -546,7 +549,7 @@ public class GUIDetallesLibro extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnRegresarActionPerformed
 
     private void BtnVerReseñasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnVerReseñasActionPerformed
-        GUIReseñas resenas = new GUIReseñas();
+        GUIReseñas resenas = new GUIReseñas(this.libroActual);
         resenas.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_BtnVerReseñasActionPerformed

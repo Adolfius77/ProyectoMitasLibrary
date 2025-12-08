@@ -273,7 +273,9 @@ public class GUIReseñas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnInicio2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnInicio2ActionPerformed
-
+        GUIINICIO inicio = new GUIINICIO();
+        inicio.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_BtnInicio2ActionPerformed
 
     private void CMBCategoriasItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CMBCategoriasItemStateChanged
@@ -285,11 +287,15 @@ public class GUIReseñas extends javax.swing.JFrame {
     }//GEN-LAST:event_CMBCategoriasActionPerformed
 
     private void BtnPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPerfilActionPerformed
-
+        GUIPerfil perfil = new GUIPerfil();
+        perfil.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_BtnPerfilActionPerformed
 
     private void BtnCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCarritoActionPerformed
-
+        GUICarrito carrito = new GUICarrito();
+        carrito.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_BtnCarritoActionPerformed
 
     private void CMBOpcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CMBOpcionesActionPerformed
@@ -297,7 +303,9 @@ public class GUIReseñas extends javax.swing.JFrame {
     }//GEN-LAST:event_CMBOpcionesActionPerformed
 
     private void BtnRegresarADetallesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRegresarADetallesActionPerformed
-        // TODO add your handling code here:
+        GUIDetallesLibro detalles = new GUIDetallesLibro(this.libroActual);
+        detalles.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_BtnRegresarADetallesActionPerformed
 
     private void BtnAgregarReseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAgregarReseñaActionPerformed

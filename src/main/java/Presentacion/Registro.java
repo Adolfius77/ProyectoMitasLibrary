@@ -293,6 +293,7 @@ public class Registro extends javax.swing.JFrame {
         nuevoCliente.setApellidos(apellido);
         nuevoCliente.setEmail(correo);
         nuevoCliente.setPassword(pass);
+        nuevoCliente.setFotoUrl(this.rutaImagenSeleccionada);
 
         try {
             ClienteController controller = new ClienteController();
