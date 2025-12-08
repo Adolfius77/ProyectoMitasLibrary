@@ -5,6 +5,7 @@
 package Presentacion;
 
 import Model.Libro;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -276,7 +277,12 @@ public class GUIReseñas extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnRegresarADetallesActionPerformed
 
     private void BtnAgregarReseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAgregarReseñaActionPerformed
-        // TODO add your handling code here:
+//        String nuevaResenaTexto = JOptionPane.showInputDialog(
+//                            this,
+//                            "Escribe tu reseña para: " + libroConResenas.getTitulo(),
+//                            "Agregar Nueva Reseña",
+//                            JOptionPane.PLAIN_MESSAGE
+//                    );
     }//GEN-LAST:event_BtnAgregarReseñaActionPerformed
 
     /**
