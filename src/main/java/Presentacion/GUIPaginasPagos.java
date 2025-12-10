@@ -5,6 +5,8 @@
 package Presentacion;
 
 import Model.Item;
+import Model.Orden;
+import config.SesionUsuario;
 import java.util.List;
 
 /**
@@ -26,19 +28,18 @@ public class GUIPaginasPagos extends javax.swing.JFrame {
     private void CargarItems() {
         panelDinamico.removeAll();
         List<Item> items = config.SesionUsuario.get().getCarrito().getItems();
-
-        double totalPagar = 0.0;
+        Orden carrito = SesionUsuario.get().getCarrito();
+        
         int totalArticulos = 0;
 
         for (Item item : items) {
             GUIcarritoDetalle tarjeta = new GUIcarritoDetalle(item, () -> CargarItems());
             panelDinamico.add(tarjeta);
 
-            totalPagar += item.getSubtotal();
             totalArticulos += item.getCantidad();
         }
         lblTotalArticulos.setText(String.valueOf(totalArticulos));
-        txtTotalApagar.setText(String.valueOf(totalPagar));
+        txtTotalApagar.setText(String.valueOf(carrito.getTotalPagado()));
 
         panelDinamico.revalidate();
         panelDinamico.repaint();
@@ -225,6 +226,11 @@ public class GUIPaginasPagos extends javax.swing.JFrame {
         btnPaypal.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         btnPaypal.setForeground(new java.awt.Color(255, 255, 255));
         btnPaypal.setText("Pagar Con Paypal");
+        btnPaypal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPaypalActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -370,8 +376,16 @@ public class GUIPaginasPagos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCategoriasActionPerformed
 
     private void btnMatercardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMatercardActionPerformed
-
+        GUIPagoMastercard tarjeta = new GUIPagoMastercard();
+        tarjeta.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnMatercardActionPerformed
+
+    private void btnPaypalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPaypalActionPerformed
+        GUIPagoPaypal paypal = new GUIPagoPaypal();
+        paypal.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnPaypalActionPerformed
 
     /**
      * @param args the command line arguments
