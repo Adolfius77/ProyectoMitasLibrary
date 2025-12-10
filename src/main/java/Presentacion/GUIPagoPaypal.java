@@ -1,11 +1,15 @@
 package Presentacion;
 
+import Controllers.impl.ClienteController;
 import Controllers.impl.OrdenController;
 import DAO.impl.LibroDAO;
 import DAO.impl.OrdenDAO;
+import Model.Cliente;
 import Model.Item;
+import Model.MetodoPago;
 import Model.Orden;
 import config.SesionUsuario;
+import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JOptionPane;
 
@@ -282,41 +286,70 @@ public class GUIPagoPaypal extends javax.swing.JFrame {
     }//GEN-LAST:event_TxtFldCorreoActionPerformed
 
     private void BTNPagarPaypalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNPagarPaypalActionPerformed
-        
+        // 1. Validaciones
+        if (TxtFldCorreo.getText().trim().isEmpty() || TxtFldContraseña.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor ingresa tu correo y contraseña de PayPal.", "Campos Vacíos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
 
         try {
-            // 2. Preparar la Orden Final
+            
             Orden ordenFinal = SesionUsuario.get().getCarrito();
+            Cliente clienteActual = SesionUsuario.get().getCliente();
+
+           
             ordenFinal.setFechaCompra(new Date());
             ordenFinal.setEstado("PAGADO");
-            ordenFinal.setCliente_Id(SesionUsuario.get().getCliente().getId());
+            ordenFinal.setCliente_Id(clienteActual.getId());
+
+         
+            MetodoPago pagoPaypal = new MetodoPago();
+            pagoPaypal.setTipo("PAYPAL");
+            pagoPaypal.setMarca("PAYPAL");
+            pagoPaypal.setTitular(TxtFldCorreo.getText()); 
+            pagoPaypal.setNumeroTarjeta("N/A"); 
+            pagoPaypal.setFechaExpiracion("N/A");
+            pagoPaypal.setTerminacion("N/A");
+
             
-            // Simulación de validación de pago...
+            if (clienteActual.getMetodosPago() == null) clienteActual.setMetodosPago(new ArrayList<>());
+            if (clienteActual.getDirecciones() == null) clienteActual.setDirecciones(new ArrayList<>());
+
+            clienteActual.getMetodosPago().add(pagoPaypal);
             
-            // 3. Guardar Orden en Base de Datos
+            
+            if (ordenFinal.getDireccionEnvio() != null) {
+                clienteActual.getDirecciones().add(ordenFinal.getDireccionEnvio());
+            }
+
+           
+            ClienteController clienteController = new ClienteController();
+            clienteController.actualizarCliente(clienteActual);
+
+            
             OrdenController ordenController = new OrdenController(new OrdenDAO());
             ordenController.registrarOrden(ordenFinal);
 
-            // 4. DECREMENTAR STOCK
+            
             LibroDAO libroDAO = new LibroDAO();
             for (Item item : ordenFinal.getItems()) {
-                // Restar la cantidad comprada al inventario
                 libroDAO.actualizaStock(item.getLibroId().toString(), item.getCantidad());
             }
 
-            // 5. Éxito y Limpieza
-            JOptionPane.showMessageDialog(this, "¡El libro se compró exitosamente!");
+            
+            JOptionPane.showMessageDialog(this, "¡Pago con PayPal exitoso!\nGracias por tu compra.");
             SesionUsuario.get().limpiarCarrito();
 
-            // 6. Volver al Inicio
             GUIINICIO inicio = new GUIINICIO();
             inicio.setVisible(true);
             this.dispose();
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error en la compra: " + e.getMessage());
             e.printStackTrace();
-        }    
+            JOptionPane.showMessageDialog(this, "Error en el pago: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+     
+
 
     }//GEN-LAST:event_BTNPagarPaypalActionPerformed
 

@@ -473,25 +473,22 @@ public class GUIPagoMastercard extends javax.swing.JFrame {
     }//GEN-LAST:event_TxtFldCorreoActionPerformed
 
     private void btnPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagarActionPerformed
-        if (TxtFldNumTarjeta.getText().isEmpty() || TxtFldCVV.getText().isEmpty()) {
+        if (txtNumeroTarjeta.getText().isEmpty() || txtCVV.getText().isEmpty()) {
             javax.swing.JOptionPane.showMessageDialog(this, "Datos incompletos.");
             return;
         }
 
         try {
-            // 2. Obtener datos de sesión
+           
             Model.Orden ordenFinal = config.SesionUsuario.get().getCarrito();
             Cliente clienteActual = config.SesionUsuario.get().getCliente();
 
-            // Completar datos de la orden
+         
             ordenFinal.setFechaCompra(new java.util.Date());
             ordenFinal.setEstado("PAGADO");
             ordenFinal.setCliente_Id(clienteActual.getId());
 
-            // ---------------------------------------------------------
-            // NUEVA LÓGICA: ACTUALIZAR DATOS DEL CLIENTE
-            // ---------------------------------------------------------
-            // A) Guardar la Dirección usada en la lista del cliente
+           
             if (clienteActual.getDirecciones() == null) {
                 clienteActual.setDirecciones(new ArrayList<>());
             }
@@ -499,8 +496,8 @@ public class GUIPagoMastercard extends javax.swing.JFrame {
 
             // B) Guardar el Método de Pago usado
             MetodoPago nuevoMetodo = new MetodoPago();
-            nuevoMetodo.setTitular(TxtFldNombreComp.getText());
-            nuevoMetodo.setNumeroTarjeta(String.valueOf(TxtFldNumTarjeta).getText()); 
+            nuevoMetodo.setTitular(txtNombreTitular.getText());
+            nuevoMetodo.setNumeroTarjeta(txtNumeroTarjeta.getText()); 
             nuevoMetodo.setFechaExpiracion(TxtFldFechaVencim.getText());
 
             if (clienteActual.getMetodosPago() == null) {
@@ -508,12 +505,11 @@ public class GUIPagoMastercard extends javax.swing.JFrame {
             }
             clienteActual.getMetodosPago().add(nuevoMetodo);
 
-            // C) Actualizar Cliente en Base de Datos
+         
             ClienteController clienteController = new ClienteController();
             clienteController.actualizarCliente(clienteActual);
-            // ---------------------------------------------------------
 
-            // 3. Guardar Orden y Actualizar Stock (Igual que antes)
+           
             Controllers.impl.OrdenController ordenController = new Controllers.impl.OrdenController(new DAO.impl.OrdenDAO());
             ordenController.registrarOrden(ordenFinal);
 
@@ -522,7 +518,7 @@ public class GUIPagoMastercard extends javax.swing.JFrame {
                 libroDAO.actualizaStock(item.getLibroId().toString(), item.getCantidad());
             }
 
-            // 4. Finalizar
+           
             javax.swing.JOptionPane.showMessageDialog(this, "¡Compra Exitosa! Se han guardado tus datos de envío y pago.");
             config.SesionUsuario.get().limpiarCarrito();
 

@@ -15,13 +15,13 @@ public class MetodoPago {
     private String marca;
     private String terminacion;
     private String titular;
-    private Date fechaExpiracion; 
-    private int NumeroTarjeta;
+    private String fechaExpiracion; 
+    private String NumeroTarjeta;
 
     public MetodoPago() {
     }
 
-    public MetodoPago(String tipo, String marca, String terminacion, String titular, Date fechaExpiracion, int NumeroTarjeta) {
+    public MetodoPago(String tipo, String marca, String terminacion, String titular, String fechaExpiracion, String NumeroTarjeta) {
         this.tipo = tipo;
         this.marca = marca;
         this.terminacion = terminacion;
@@ -62,21 +62,24 @@ public class MetodoPago {
         this.titular = titular;
     }
 
-    public Date getFechaExpiracion() {
+    public String getFechaExpiracion() {
         return fechaExpiracion;
     }
 
-    public void setFechaExpiracion(Date fechaExpiracion) {
+    public void setFechaExpiracion(String fechaExpiracion) {
         this.fechaExpiracion = fechaExpiracion;
     }
 
-    public int getNumeroTarjeta() {
+    public String getNumeroTarjeta() {
         return NumeroTarjeta;
     }
 
-    public void setNumeroTarjeta(int NumeroTarjeta) {
+    public void setNumeroTarjeta(String NumeroTarjeta) {
         this.NumeroTarjeta = NumeroTarjeta;
     }
+
+   
+    
     
     
     
