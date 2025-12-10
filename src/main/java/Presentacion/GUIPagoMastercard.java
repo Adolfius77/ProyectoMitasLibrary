@@ -433,19 +433,32 @@ public class GUIPagoMastercard extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnInicioActionPerformed
-
+        GUIINICIO inicio = new GUIINICIO();
+        inicio.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_BtnInicioActionPerformed
 
     private void BtnCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCarritoActionPerformed
-
+        GUICarrito carrito = new GUICarrito();
+        carrito.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_BtnCarritoActionPerformed
 
     private void CMBOpcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CMBOpcionesActionPerformed
-        // TODO add your handling code here:
+             String opcion = (String) CMBOpciones.getSelectedItem();
+        if("Cerrar Sesion".equals(opcion)){
+            config.SesionUsuario.get().cerrarSesion();
+            InicioSesion login = new InicioSesion();
+            login.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_CMBOpcionesActionPerformed
 
     private void BtnPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPerfilActionPerformed
-
+        GUIPerfil perfil = new GUIPerfil();
+        perfil.setVisible(true);
+        this.dispose();
+        
     }//GEN-LAST:event_BtnPerfilActionPerformed
 
     private void TxtFldNumTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtFldNumTarjetaActionPerformed

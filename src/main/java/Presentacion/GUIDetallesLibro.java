@@ -95,9 +95,9 @@ public class GUIDetallesLibro extends javax.swing.JFrame {
 
         jPanel3 = new javax.swing.JPanel();
         CMBCategorias = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         BtnInicio = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
         BtnPerfil = new javax.swing.JButton();
         BtnCarrito = new javax.swing.JButton();
         jLabel21 = new javax.swing.JLabel();
@@ -155,6 +155,10 @@ public class GUIDetallesLibro extends javax.swing.JFrame {
             }
         });
 
+        jLabel6.setFont(new java.awt.Font("Segoe UI Black", 0, 25)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("CATEGORIAS");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(101, 85, 143));
@@ -166,10 +170,6 @@ public class GUIDetallesLibro extends javax.swing.JFrame {
                 BtnInicioActionPerformed(evt);
             }
         });
-
-        jLabel6.setFont(new java.awt.Font("Segoe UI Black", 0, 25)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("CATEGORIAS");
 
         BtnPerfil.setBackground(new java.awt.Color(101, 85, 143));
         BtnPerfil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/usuario.png"))); // NOI18N
@@ -208,9 +208,7 @@ public class GUIDetallesLibro extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(BtnInicio)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel6)
-                .addGap(74, 74, 74)
+                .addGap(252, 252, 252)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BtnPerfil)
@@ -227,17 +225,12 @@ public class GUIDetallesLibro extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(31, 31, 31))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(BtnInicio)
-                            .addComponent(BtnCarrito)
-                            .addComponent(jLabel21)
-                            .addComponent(BtnPerfil)
-                            .addComponent(CMBOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(19, 19, 19))))
+                    .addComponent(BtnInicio)
+                    .addComponent(BtnCarrito)
+                    .addComponent(jLabel21)
+                    .addComponent(BtnPerfil)
+                    .addComponent(CMBOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))

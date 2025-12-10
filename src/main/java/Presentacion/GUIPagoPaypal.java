@@ -354,7 +354,9 @@ public class GUIPagoPaypal extends javax.swing.JFrame {
     }//GEN-LAST:event_BTNPagarPaypalActionPerformed
 
     private void BtnInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnInicioActionPerformed
-
+        GUIINICIO inicio = new GUIINICIO();
+        inicio.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_BtnInicioActionPerformed
 
     private void BtnCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCarritoActionPerformed
@@ -362,11 +364,19 @@ public class GUIPagoPaypal extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnCarritoActionPerformed
 
     private void CMBOpcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CMBOpcionesActionPerformed
-        // TODO add your handling code here:
+           String opcion = (String) CMBOpciones.getSelectedItem();
+        if("Cerrar Sesion".equals(opcion)){
+            config.SesionUsuario.get().cerrarSesion();
+            InicioSesion login = new InicioSesion();
+            login.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_CMBOpcionesActionPerformed
 
     private void BtnPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPerfilActionPerformed
-
+        GUIPerfil perfil = new GUIPerfil();
+        perfil.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_BtnPerfilActionPerformed
 
     private void TxtFldContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtFldContraseñaActionPerformed
@@ -374,7 +384,13 @@ public class GUIPagoPaypal extends javax.swing.JFrame {
     }//GEN-LAST:event_TxtFldContraseñaActionPerformed
 
     private void btnCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriasActionPerformed
-
+        try {
+            GUICategorias categorias = new GUICategorias();
+            categorias.setVisible(true);
+            this.dispose();
+        } catch (Exception e) {
+            System.out.println("error al ir a categorias"+ e.getMessage());
+        }
     }//GEN-LAST:event_btnCategoriasActionPerformed
 
     /**

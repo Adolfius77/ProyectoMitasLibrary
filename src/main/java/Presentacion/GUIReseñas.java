@@ -299,7 +299,13 @@ public class GUIReseñas extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnCarritoActionPerformed
 
     private void CMBOpcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CMBOpcionesActionPerformed
-        // TODO add your handling code here:
+         String opcion = (String) CMBOpciones.getSelectedItem();
+        if("Cerrar Sesion".equals(opcion)){
+            config.SesionUsuario.get().cerrarSesion();
+            InicioSesion login = new InicioSesion();
+            login.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_CMBOpcionesActionPerformed
 
     private void BtnRegresarADetallesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRegresarADetallesActionPerformed

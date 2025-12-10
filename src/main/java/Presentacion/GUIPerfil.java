@@ -156,6 +156,11 @@ public class GUIPerfil extends javax.swing.JFrame {
 
         BtnPerfil.setBackground(new java.awt.Color(101, 85, 143));
         BtnPerfil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/usuario.png"))); // NOI18N
+        BtnPerfil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnPerfilActionPerformed(evt);
+            }
+        });
 
         btnCategorias.setFont(new java.awt.Font("Segoe UI Black", 0, 20)); // NOI18N
         btnCategorias.setText("CATEGORIAS");
@@ -395,11 +400,16 @@ public class GUIPerfil extends javax.swing.JFrame {
 
 
     private void BtnInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnInicioActionPerformed
-
+        GUIINICIO inicio = new GUIINICIO();
+        inicio.setVisible(true);
+        this.dispose();
+        
     }//GEN-LAST:event_BtnInicioActionPerformed
 
     private void BtnCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCarritoActionPerformed
-
+        GUICarrito carrito = new GUICarrito();
+        carrito.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_BtnCarritoActionPerformed
 
     private void CMBOpcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CMBOpcionesActionPerformed
@@ -415,12 +425,25 @@ public class GUIPerfil extends javax.swing.JFrame {
     }//GEN-LAST:event_BTNCambioContraseñaActionPerformed
 
     private void btnCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriasActionPerformed
-
+        try {
+            GUICategorias categorias = new GUICategorias();
+            categorias.setVisible(true);
+            this.dispose();
+        } catch (Exception e) {
+            System.out.println("error al entrar a categorias hermano" + e.getMessage());
+        }
+       
     }//GEN-LAST:event_btnCategoriasActionPerformed
 
     private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCerrarSesionActionPerformed
+
+    private void BtnPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPerfilActionPerformed
+       GUIPerfil perfil = new GUIPerfil();
+       perfil.setVisible(true);
+       this.dispose();
+    }//GEN-LAST:event_BtnPerfilActionPerformed
 
     /**
      * @param args the command line arguments
