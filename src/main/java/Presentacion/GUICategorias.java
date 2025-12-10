@@ -58,6 +58,32 @@ public class GUICategorias extends javax.swing.JFrame {
         }
 
     }
+    private void cargarLibrosConFiltro(String categoria, String busqueda) {
+        try {
+            PanelDinamico.removeAll();
+
+            jLabel1.setText(categoria); 
+
+            List<Libro> listaLibros = libroController.filtrarLibros(busqueda, categoria);
+
+            if (listaLibros.isEmpty()) {
+                javax.swing.JLabel lblVacio = new javax.swing.JLabel("No se encontraron libros.", javax.swing.SwingConstants.CENTER);
+                lblVacio.setFont(new java.awt.Font("Segoe UI", 1, 18));
+                PanelDinamico.add(lblVacio);
+            } else {
+                for (Libro libro : listaLibros) {
+                    PanelLibro tarjeta = new PanelLibro(libro);
+                    PanelDinamico.add(tarjeta);
+                }
+            }
+
+            PanelDinamico.revalidate();
+            PanelDinamico.repaint();
+
+        } catch (Exception e) {
+            System.out.println("Error al cargar libros filtrados: " + e.getMessage());
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -224,6 +250,11 @@ public class GUICategorias extends javax.swing.JFrame {
 
         txtBuscador.setBackground(new java.awt.Color(255, 255, 255));
         txtBuscador.setForeground(new java.awt.Color(0, 0, 0));
+        txtBuscador.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscadorKeyReleased(evt);
+            }
+        });
 
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/lupa.png"))); // NOI18N
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -314,6 +345,9 @@ public class GUICategorias extends javax.swing.JFrame {
     private void CMBCategoriasItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CMBCategoriasItemStateChanged
         if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED) {
             String categoriaSeleccionada = (String) CMBCategorias.getSelectedItem();
+            
+            txtBuscador.setText(""); 
+            
             try {
                 cargarLibros(categoriaSeleccionada);
             } catch (Exception ex) {
@@ -325,6 +359,18 @@ public class GUICategorias extends javax.swing.JFrame {
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnBuscarActionPerformed
+    
+    private void txtBuscadorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscadorKeyReleased
+        try{
+            String textoBusqueda = txtBuscador.getText();
+            String categoriaActual = (String)CMBCategorias.getSelectedItem();
+            
+            cargarLibrosConFiltro(categoriaActual, textoBusqueda);
+            
+        }catch(Exception e){
+            System.out.println("error al buscar" + e.getMessage());
+        }
+    }//GEN-LAST:event_txtBuscadorKeyReleased
 
     /**
      * @param args the command line arguments

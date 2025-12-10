@@ -30,5 +30,5 @@ public interface IClienteController {
 
     Cliente autenticar(String email, String password) throws Exception;
     
-    List<Libro>filtrarLibros(String busqueda, String categoria) throws Exception;
+   
 }

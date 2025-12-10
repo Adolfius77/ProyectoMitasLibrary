@@ -23,5 +23,5 @@ public interface ILibroController {
     Optional<Libro> buscarPorTitulo(String titulo) throws Exception;
     List<Libro> listarLibros() throws Exception;
     List<Libro> listarPorCategoria(String categoria) throws Exception;
-    
+    List<Libro> filtrarLibros(String busqueda, String categoria) throws Exception;
 }

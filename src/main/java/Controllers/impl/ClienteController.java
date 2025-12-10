@@ -154,18 +154,5 @@ public class ClienteController implements IClienteController {
             throw new Exception("No existe una cuenta con este correo.");
         }
     }
-    @Override
-    public List<Libro> filtrarLibros(String busqueda, String categoria) throws Exception {
-        // Si no hay categoría seleccionada, lanzamos error
-        if (categoria == null || categoria.isBlank()) {
-            throw new Exception("La categoría es requerida");
-        }
-        
-        // Si la búsqueda está vacía, devolvemos TODOS los de esa categoría
-        if (busqueda == null || busqueda.trim().isEmpty()) {
-            return listarPorCategoria(categoria);
-        }
-        
-        return libroDAO.buscarPorTituloYCategoria(busqueda.trim(), categoria);
-    }
+    
 }

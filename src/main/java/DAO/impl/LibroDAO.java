@@ -130,12 +130,13 @@ public class LibroDAO implements ILibroDAO {
     @Override
     public List<Libro> buscarPorTituloYCategoria(String titulo, String categoria) {
         try {
+           
             return col.find(Filters.and(
                     Filters.eq("categorias", categoria),
                     Filters.regex("titulo", titulo, "i") 
             )).into(new ArrayList<>());
         } catch (MongoException e) {
-            System.out.println("Error al filtrar libros: " + e.getMessage());
+            System.out.println("Error al buscar: " + e.getMessage());
             return new ArrayList<>();
         }
     }

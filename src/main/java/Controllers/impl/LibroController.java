@@ -113,5 +113,13 @@ public class LibroController implements ILibroController {
         }
         return libroDAO.obtenerLibrosPorCategoria(categoria);
     }
-
+    public List<Libro> filtrarLibros(String busqueda, String categoria) throws Exception {
+        if (categoria == null || categoria.isBlank()) return new java.util.ArrayList<>();
+        
+        if (busqueda == null || busqueda.trim().isEmpty()) {
+            return listarPorCategoria(categoria);
+        }
+        
+        return libroDAO.buscarPorTituloYCategoria(busqueda.trim(), categoria);
+    }
 }
