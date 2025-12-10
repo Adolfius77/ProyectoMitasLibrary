@@ -4,6 +4,15 @@
  */
 package Presentacion;
 
+import Controllers.impl.OrdenController;
+import DAO.impl.LibroDAO;
+import DAO.impl.OrdenDAO;
+import Model.Item;
+import Model.Orden;
+import config.SesionUsuario;
+import java.util.Date;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author emiim
@@ -27,6 +36,23 @@ public class GUIPagoMastercard extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        TxtFldNumTarjeta = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        TxtFldCVV = new javax.swing.JTextField();
+        TxtFldFechaVencim = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        TxtFldNombreComp = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        TxtFldCorreo = new javax.swing.JTextField();
+        BTNPagarMastercard = new javax.swing.JButton();
+        jSpinner1 = new javax.swing.JSpinner();
+        jTextField2 = new javax.swing.JTextField();
+        jPanel3 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         BtnInicio = new javax.swing.JButton();
         BtnCarrito = new javax.swing.JButton();
@@ -34,22 +60,119 @@ public class GUIPagoMastercard extends javax.swing.JFrame {
         CMBOpciones = new javax.swing.JComboBox<>();
         jLabel21 = new javax.swing.JLabel();
         BtnPerfil = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        TxtFldNumTarjeta = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        TxtFldFechaVencim = new javax.swing.JTextField();
-        BTNPagarMastercard = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
-        TxtFldCVV = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        TxtFldNombreComp = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        TxtFldCorreo = new javax.swing.JTextField();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        txtNumeroTarjeta = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        txtFecha = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        txtCorreoElectronico = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        txtNombreTitular = new javax.swing.JTextField();
+        txtCVV = new javax.swing.JTextField();
+        btnPagar = new javax.swing.JButton();
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/visamasteercard.png"))); // NOI18N
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel3.setText("Pagar con Visa/Mastercard");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(jLabel3))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(157, 157, 157)
+                        .addComponent(jLabel1)))
+                .addContainerGap(61, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap(15, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addGap(12, 12, 12))
+        );
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel4.setText("Numero de tarjeta:");
+        jLabel4.setToolTipText("");
+
+        TxtFldNumTarjeta.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        TxtFldNumTarjeta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtFldNumTarjetaActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel5.setText("Fecha vencimiento:");
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel6.setText("CVV:");
+
+        TxtFldCVV.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        TxtFldCVV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtFldCVVActionPerformed(evt);
+            }
+        });
+
+        TxtFldFechaVencim.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        TxtFldFechaVencim.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtFldFechaVencimActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel7.setText("Nombre completo del titular:");
+
+        TxtFldNombreComp.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        TxtFldNombreComp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtFldNombreCompActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel8.setText("Correo electrónico:");
+
+        TxtFldCorreo.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        TxtFldCorreo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtFldCorreoActionPerformed(evt);
+            }
+        });
+
+        BTNPagarMastercard.setBackground(new java.awt.Color(101, 85, 143));
+        BTNPagarMastercard.setFont(new java.awt.Font("Segoe UI Black", 0, 20)); // NOI18N
+        BTNPagarMastercard.setForeground(new java.awt.Color(255, 255, 255));
+        BTNPagarMastercard.setText("Pagar");
+        BTNPagarMastercard.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNPagarMastercardActionPerformed(evt);
+            }
+        });
+
+        jTextField2.setBackground(new java.awt.Color(255, 255, 255));
+        jTextField2.setForeground(new java.awt.Color(0, 0, 0));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel3.setBackground(new java.awt.Color(217, 202, 218));
 
         jPanel1.setBackground(new java.awt.Color(101, 85, 143));
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -99,11 +222,11 @@ public class GUIPagoMastercard extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(43, 43, 43)
                 .addComponent(BtnInicio)
-                .addGap(32, 32, 32)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(137, 137, 137)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BtnPerfil)
-                .addGap(43, 43, 43)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(BtnCarrito)
                 .addGap(31, 31, 31)
                 .addComponent(jLabel21)
@@ -127,177 +250,179 @@ public class GUIPagoMastercard extends javax.swing.JFrame {
                         .addGap(42, 42, 42)
                         .addComponent(BtnInicio))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
+                        .addGap(26, 26, 26)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel4.setForeground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/visamasteercard.png"))); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel9.setText("CVV");
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabel3.setText("Pagar con Visa/Mastercard");
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/visamasteercard.png"))); // NOI18N
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(jLabel3))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(157, 157, 157)
-                        .addComponent(jLabel1)))
-                .addContainerGap(61, Short.MAX_VALUE))
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel11.setText("Pagar con Visa / MasterCard");
+
+        txtNumeroTarjeta.setBackground(new java.awt.Color(255, 255, 255));
+        txtNumeroTarjeta.setForeground(new java.awt.Color(0, 0, 0));
+
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel12.setText("Numero de Tarjeta:");
+
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel13.setText("Fecha Vencimiento");
+
+        txtFecha.setBackground(new java.awt.Color(255, 255, 255));
+        txtFecha.setForeground(new java.awt.Color(0, 0, 0));
+
+        jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel14.setText("Correo Electronico:");
+
+        txtCorreoElectronico.setBackground(new java.awt.Color(255, 255, 255));
+        txtCorreoElectronico.setForeground(new java.awt.Color(0, 0, 0));
+
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel15.setText("Nombre Completo Del Titular");
+
+        txtNombreTitular.setBackground(new java.awt.Color(255, 255, 255));
+        txtNombreTitular.setForeground(new java.awt.Color(0, 0, 0));
+
+        txtCVV.setBackground(new java.awt.Color(255, 255, 255));
+        txtCVV.setForeground(new java.awt.Color(0, 0, 0));
+
+        btnPagar.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        btnPagar.setForeground(new java.awt.Color(255, 255, 255));
+        btnPagar.setText("Pagar");
+        btnPagar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPagarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(209, 209, 209)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel13)
+                            .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(31, 31, 31)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtCVV, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel11)
+                            .addComponent(txtNumeroTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(33, 147, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(txtNombreTitular, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(194, 194, 194))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                                .addComponent(txtCorreoElectronico, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(136, 136, 136)))
+                        .addComponent(btnPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel14)
+                        .addGap(201, 201, 201))))
+            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                    .addContainerGap(263, Short.MAX_VALUE)
+                    .addComponent(jLabel12)
+                    .addGap(212, 212, 212)))
+            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                    .addContainerGap(233, Short.MAX_VALUE)
+                    .addComponent(jLabel15)
+                    .addGap(150, 150, 150)))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(15, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(jLabel11)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel10)
+                .addGap(57, 57, 57)
+                .addComponent(txtNumeroTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
-                .addGap(12, 12, 12))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel13))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCVV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(51, 51, 51)
+                .addComponent(txtNombreTitular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel14)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtCorreoElectronico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnPagar)
+                .addContainerGap(128, Short.MAX_VALUE))
+            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel4Layout.createSequentialGroup()
+                    .addGap(162, 162, 162)
+                    .addComponent(jLabel12)
+                    .addContainerGap(415, Short.MAX_VALUE)))
+            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel4Layout.createSequentialGroup()
+                    .addGap(300, 300, 300)
+                    .addComponent(jLabel15)
+                    .addContainerGap(277, Short.MAX_VALUE)))
         );
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel4.setText("Numero de tarjeta:");
-        jLabel4.setToolTipText("");
-
-        TxtFldNumTarjeta.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        TxtFldNumTarjeta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtFldNumTarjetaActionPerformed(evt);
-            }
-        });
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel5.setText("Fecha vencimiento:");
-
-        TxtFldFechaVencim.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        TxtFldFechaVencim.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtFldFechaVencimActionPerformed(evt);
-            }
-        });
-
-        BTNPagarMastercard.setBackground(new java.awt.Color(101, 85, 143));
-        BTNPagarMastercard.setFont(new java.awt.Font("Segoe UI Black", 0, 20)); // NOI18N
-        BTNPagarMastercard.setForeground(new java.awt.Color(255, 255, 255));
-        BTNPagarMastercard.setText("Pagar");
-        BTNPagarMastercard.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BTNPagarMastercardActionPerformed(evt);
-            }
-        });
-
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel6.setText("CVV:");
-
-        TxtFldCVV.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        TxtFldCVV.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtFldCVVActionPerformed(evt);
-            }
-        });
-
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel7.setText("Nombre completo del titular:");
-
-        TxtFldNombreComp.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        TxtFldNombreComp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtFldNombreCompActionPerformed(evt);
-            }
-        });
-
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel8.setText("Correo electrónico:");
-
-        TxtFldCorreo.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        TxtFldCorreo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtFldCorreoActionPerformed(evt);
-            }
-        });
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(170, 170, 170)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 25, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(TxtFldFechaVencim, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(67, 67, 67)
-                                    .addComponent(jLabel6))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(59, 59, 59)
-                                    .addComponent(TxtFldCVV, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGap(301, 301, 301))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel4)
-                            .addGap(386, 386, 386)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(91, 91, 91)
-                        .addComponent(jLabel8)
-                        .addGap(330, 330, 330))))
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(150, 150, 150)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(259, 259, 259)
-                        .addComponent(TxtFldNumTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(241, 241, 241)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(TxtFldNombreComp, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7)
-                            .addComponent(TxtFldCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(BTNPagarMastercard, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                .addComponent(TxtFldNumTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(TxtFldCVV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TxtFldFechaVencim, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(TxtFldNombreComp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(TxtFldCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
-                .addComponent(BTNPagarMastercard)
-                .addGap(93, 93, 93))
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -342,6 +467,47 @@ public class GUIPagoMastercard extends javax.swing.JFrame {
     private void TxtFldCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtFldCorreoActionPerformed
 
     }//GEN-LAST:event_TxtFldCorreoActionPerformed
+
+    private void btnPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagarActionPerformed
+        // 1. Validar campos de tarjeta
+        if(TxtFldNumTarjeta.getText().isEmpty() || TxtFldCVV.getText().isEmpty()){
+             JOptionPane.showMessageDialog(this, "Datos incompletos.");
+             return;
+        }
+
+        try {
+            // 2. Preparar la Orden Final
+            Orden ordenFinal = SesionUsuario.get().getCarrito();
+            ordenFinal.setFechaCompra(new Date());
+            ordenFinal.setEstado("PAGADO");
+            ordenFinal.setCliente_Id(SesionUsuario.get().getCliente().getId());
+            
+            // Simulación de validación de pago...
+            
+            // 3. Guardar Orden en Base de Datos
+            OrdenController ordenController = new OrdenController(new OrdenDAO());
+            ordenController.registrarOrden(ordenFinal);
+
+            // 4. DECREMENTAR STOCK
+            LibroDAO libroDAO = new LibroDAO();
+            for (Item item : ordenFinal.getItems()) {
+                libroDAO.actualizaStock(item.getLibroId().toString(), item.getCantidad());
+            }
+
+            // 5. Éxito y Limpieza
+            JOptionPane.showMessageDialog(this, "¡El libro se compró exitosamente!");
+            SesionUsuario.get().limpiarCarrito();
+
+            // 6. Volver al Inicio
+            GUIINICIO inicio = new GUIINICIO();
+            inicio.setVisible(true);
+            this.dispose();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error en la compra: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btnPagarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -391,7 +557,14 @@ public class GUIPagoMastercard extends javax.swing.JFrame {
     private javax.swing.JTextField TxtFldFechaVencim;
     private javax.swing.JTextField TxtFldNombreComp;
     private javax.swing.JTextField TxtFldNumTarjeta;
+    private javax.swing.JButton btnPagar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
@@ -400,7 +573,17 @@ public class GUIPagoMastercard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField txtCVV;
+    private javax.swing.JTextField txtCorreoElectronico;
+    private javax.swing.JTextField txtFecha;
+    private javax.swing.JTextField txtNombreTitular;
+    private javax.swing.JTextField txtNumeroTarjeta;
     // End of variables declaration//GEN-END:variables
 }
