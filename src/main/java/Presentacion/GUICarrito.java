@@ -6,6 +6,7 @@ package Presentacion;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -425,7 +426,18 @@ public class GUICarrito extends javax.swing.JFrame {
     }//GEN-LAST:event_TxtTotalPagarActionPerformed
 
     private void BtnPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPagarActionPerformed
-
+        if(config.SesionUsuario.get().getCarrito().getItems().isEmpty()){
+            JOptionPane.showMessageDialog(this, "tu carrito esta vacio agrega algo antes de pagar","carrito vacio",JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if(config.SesionUsuario.get().getCliente() == null){
+            JOptionPane.showMessageDialog(this, "debes iniciar sesion para continuar la compra hermano","iniciar sesion",JOptionPane.ERROR_MESSAGE);
+            
+            return;
+        }
+        GUISeleccionMetodoEnvio envio = new GUISeleccionMetodoEnvio();
+        envio.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_BtnPagarActionPerformed
 
     private void BtnPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPerfilActionPerformed
