@@ -40,6 +40,7 @@ public class GUIPagoPaypal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        TxtFldContraseña = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         BtnInicio = new javax.swing.JButton();
         BtnCarrito = new javax.swing.JButton();
@@ -55,8 +56,16 @@ public class GUIPagoPaypal extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         TxtFldCorreo = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        TxtFldContraseña = new javax.swing.JTextField();
         BTNPagarPaypal = new javax.swing.JButton();
+        txtPassword = new javax.swing.JPasswordField();
+
+        TxtFldContraseña.setBackground(new java.awt.Color(255, 255, 255));
+        TxtFldContraseña.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        TxtFldContraseña.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtFldContraseñaActionPerformed(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -182,14 +191,6 @@ public class GUIPagoPaypal extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Contraseña:");
 
-        TxtFldContraseña.setBackground(new java.awt.Color(255, 255, 255));
-        TxtFldContraseña.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        TxtFldContraseña.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtFldContraseñaActionPerformed(evt);
-            }
-        });
-
         BTNPagarPaypal.setBackground(new java.awt.Color(101, 85, 143));
         BTNPagarPaypal.setFont(new java.awt.Font("Segoe UI Black", 0, 20)); // NOI18N
         BTNPagarPaypal.setForeground(new java.awt.Color(255, 255, 255));
@@ -200,30 +201,35 @@ public class GUIPagoPaypal extends javax.swing.JFrame {
             }
         });
 
+        txtPassword.setBackground(new java.awt.Color(255, 255, 255));
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(TxtFldCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(TxtFldCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(37, 37, 37)
-                                .addComponent(jLabel3))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(75, 75, 75)
-                                .addComponent(jLabel1)))
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(BTNPagarPaypal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(TxtFldContraseña, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(72, 72, 72)
-                        .addComponent(jLabel4))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(114, 114, 114)
-                        .addComponent(jLabel5)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addGap(37, 37, 37)
+                                    .addComponent(jLabel3))
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addGap(75, 75, 75)
+                                    .addComponent(jLabel1)))
+                            .addComponent(BTNPagarPaypal, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGap(72, 72, 72)
+                            .addComponent(jLabel4))
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGap(114, 114, 114)
+                            .addComponent(jLabel5))))
                 .addContainerGap(42, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -240,7 +246,7 @@ public class GUIPagoPaypal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(TxtFldContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(BTNPagarPaypal)
                 .addContainerGap(77, Short.MAX_VALUE))
@@ -286,8 +292,8 @@ public class GUIPagoPaypal extends javax.swing.JFrame {
     }//GEN-LAST:event_TxtFldCorreoActionPerformed
 
     private void BTNPagarPaypalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNPagarPaypalActionPerformed
-        // 1. Validaciones
-        if (TxtFldCorreo.getText().trim().isEmpty() || TxtFldContraseña.getText().trim().isEmpty()) {
+       
+        if (TxtFldCorreo.getText().trim().isEmpty() || txtPassword.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Por favor ingresa tu correo y contraseña de PayPal.", "Campos Vacíos", JOptionPane.WARNING_MESSAGE);
             return;
         }
@@ -448,5 +454,6 @@ public class GUIPagoPaypal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPasswordField txtPassword;
     // End of variables declaration//GEN-END:variables
 }

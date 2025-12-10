@@ -4,6 +4,13 @@
  */
 package Presentacion;
 
+import Model.Cliente;
+import config.SesionUsuario;
+import java.awt.Image;
+import java.io.File;
+import java.text.SimpleDateFormat;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author emiim
@@ -16,9 +23,48 @@ public class GUIPerfil extends javax.swing.JFrame {
     public GUIPerfil() {
         initComponents();
         setLocationRelativeTo(null);
+        cargarDatosUsuario();
 
     }
+     private void cargarDatosUsuario() {
 
+        Cliente clienteActual = SesionUsuario.get().getCliente();
+
+        if (clienteActual != null) {
+            
+            lblNombre.setText(clienteActual.getNombre());
+            lblApellidos.setText(clienteActual.getApellidos());
+            lblNombreCompleto.setText(clienteActual.getNombre() + " " + clienteActual.getApellidos());
+            lblCorreo.setText(clienteActual.getEmail());
+            
+            
+            if (clienteActual.getFechaRegistro() != null) {
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                txtMiembro.setText(sdf.format(clienteActual.getFechaRegistro()));
+            } else {
+                txtMiembro.setText("Fecha desconocida");
+            }
+
+            String rutaFoto = clienteActual.getFotoUrl();
+            if (rutaFoto != null && !rutaFoto.isEmpty()) {
+                File archivoFoto = new File(rutaFoto);
+                if (archivoFoto.exists()) {
+                    try {
+                        ImageIcon iconoOriginal = new ImageIcon(rutaFoto);
+                        
+                        int ancho = 165; 
+                        int alto = 185;  
+                        
+                        Image imagenEscalada = iconoOriginal.getImage().getScaledInstance(ancho, alto, Image.SCALE_SMOOTH);
+                        jLabel3.setIcon(new ImageIcon(imagenEscalada));
+                        jLabel3.setText(""); 
+                    } catch (Exception e) {
+                        System.out.println("No se pudo cargar la imagen: " + e.getMessage());
+                    }
+                }
+            }
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -436,7 +482,11 @@ public class GUIPerfil extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCategoriasActionPerformed
 
     private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
-        // TODO add your handling code here:
+        String seleccion = (String) CMBOpciones.getSelectedItem();
+        if ("Cerrar Sesion".equals(seleccion)) {
+            btnCerrarSesionActionPerformed(evt); 
+        }
+    
     }//GEN-LAST:event_btnCerrarSesionActionPerformed
 
     private void BtnPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPerfilActionPerformed

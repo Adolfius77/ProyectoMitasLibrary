@@ -28,18 +28,22 @@ public class GUIPaginasPagos extends javax.swing.JFrame {
     private void CargarItems() {
         panelDinamico.removeAll();
         List<Item> items = config.SesionUsuario.get().getCarrito().getItems();
-        Orden carrito = SesionUsuario.get().getCarrito();
-        
+
         int totalArticulos = 0;
+        double totalCalculado = 0.0;
 
         for (Item item : items) {
             GUIcarritoDetalle tarjeta = new GUIcarritoDetalle(item, () -> CargarItems());
             panelDinamico.add(tarjeta);
 
             totalArticulos += item.getCantidad();
+
+            totalCalculado += item.getSubtotal();
         }
+
         lblTotalArticulos.setText(String.valueOf(totalArticulos));
-        txtTotalApagar.setText(String.valueOf(carrito.getTotalPagado()));
+        txtTotalApagar.setText(String.format("%.2f", totalCalculado));
+        config.SesionUsuario.get().getCarrito().setTotalPagado(totalCalculado);
 
         panelDinamico.revalidate();
         panelDinamico.repaint();
@@ -355,8 +359,8 @@ public class GUIPaginasPagos extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnCarritoActionPerformed
 
     private void CMBOpcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CMBOpcionesActionPerformed
-         String opcion = (String) CMBOpciones.getSelectedItem();
-        if("Cerrar Sesion".equals(opcion)){
+        String opcion = (String) CMBOpciones.getSelectedItem();
+        if ("Cerrar Sesion".equals(opcion)) {
             config.SesionUsuario.get().cerrarSesion();
             InicioSesion login = new InicioSesion();
             login.setVisible(true);
