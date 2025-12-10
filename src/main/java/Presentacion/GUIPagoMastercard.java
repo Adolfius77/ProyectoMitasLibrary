@@ -4,12 +4,16 @@
  */
 package Presentacion;
 
+import Controllers.impl.ClienteController;
 import Controllers.impl.OrdenController;
 import DAO.impl.LibroDAO;
 import DAO.impl.OrdenDAO;
+import Model.Cliente;
 import Model.Item;
+import Model.MetodoPago;
 import Model.Orden;
 import config.SesionUsuario;
+import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JOptionPane;
 
@@ -24,7 +28,7 @@ public class GUIPagoMastercard extends javax.swing.JFrame {
      */
     public GUIPagoMastercard() {
         initComponents();
-
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -469,43 +473,67 @@ public class GUIPagoMastercard extends javax.swing.JFrame {
     }//GEN-LAST:event_TxtFldCorreoActionPerformed
 
     private void btnPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagarActionPerformed
-        // 1. Validar campos de tarjeta
-        if(TxtFldNumTarjeta.getText().isEmpty() || TxtFldCVV.getText().isEmpty()){
-             JOptionPane.showMessageDialog(this, "Datos incompletos.");
-             return;
+        if (TxtFldNumTarjeta.getText().isEmpty() || TxtFldCVV.getText().isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Datos incompletos.");
+            return;
         }
 
         try {
-            // 2. Preparar la Orden Final
-            Orden ordenFinal = SesionUsuario.get().getCarrito();
-            ordenFinal.setFechaCompra(new Date());
+            // 2. Obtener datos de sesión
+            Model.Orden ordenFinal = config.SesionUsuario.get().getCarrito();
+            Cliente clienteActual = config.SesionUsuario.get().getCliente();
+
+            // Completar datos de la orden
+            ordenFinal.setFechaCompra(new java.util.Date());
             ordenFinal.setEstado("PAGADO");
-            ordenFinal.setCliente_Id(SesionUsuario.get().getCliente().getId());
-            
-            // Simulación de validación de pago...
-            
-            // 3. Guardar Orden en Base de Datos
-            OrdenController ordenController = new OrdenController(new OrdenDAO());
+            ordenFinal.setCliente_Id(clienteActual.getId());
+
+            // ---------------------------------------------------------
+            // NUEVA LÓGICA: ACTUALIZAR DATOS DEL CLIENTE
+            // ---------------------------------------------------------
+            // A) Guardar la Dirección usada en la lista del cliente
+            if (clienteActual.getDirecciones() == null) {
+                clienteActual.setDirecciones(new ArrayList<>());
+            }
+            clienteActual.getDirecciones().add(ordenFinal.getDireccionEnvio());
+
+            // B) Guardar el Método de Pago usado
+            MetodoPago nuevoMetodo = new MetodoPago();
+            nuevoMetodo.setTitular(TxtFldNombreComp.getText());
+            nuevoMetodo.setNumeroTarjeta(String.valueOf(TxtFldNumTarjeta).getText()); 
+            nuevoMetodo.setFechaExpiracion(TxtFldFechaVencim.getText());
+
+            if (clienteActual.getMetodosPago() == null) {
+                clienteActual.setMetodosPago(new ArrayList<>());
+            }
+            clienteActual.getMetodosPago().add(nuevoMetodo);
+
+            // C) Actualizar Cliente en Base de Datos
+            ClienteController clienteController = new ClienteController();
+            clienteController.actualizarCliente(clienteActual);
+            // ---------------------------------------------------------
+
+            // 3. Guardar Orden y Actualizar Stock (Igual que antes)
+            Controllers.impl.OrdenController ordenController = new Controllers.impl.OrdenController(new DAO.impl.OrdenDAO());
             ordenController.registrarOrden(ordenFinal);
 
-            // 4. DECREMENTAR STOCK
-            LibroDAO libroDAO = new LibroDAO();
-            for (Item item : ordenFinal.getItems()) {
+            DAO.impl.LibroDAO libroDAO = new DAO.impl.LibroDAO();
+            for (Model.Item item : ordenFinal.getItems()) {
                 libroDAO.actualizaStock(item.getLibroId().toString(), item.getCantidad());
             }
 
-            // 5. Éxito y Limpieza
-            JOptionPane.showMessageDialog(this, "¡El libro se compró exitosamente!");
-            SesionUsuario.get().limpiarCarrito();
+            // 4. Finalizar
+            javax.swing.JOptionPane.showMessageDialog(this, "¡Compra Exitosa! Se han guardado tus datos de envío y pago.");
+            config.SesionUsuario.get().limpiarCarrito();
 
-            // 6. Volver al Inicio
             GUIINICIO inicio = new GUIINICIO();
             inicio.setVisible(true);
             this.dispose();
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error en la compra: " + e.getMessage());
+            System.out.println("Error: " + e.getMessage());
             e.printStackTrace();
+            javax.swing.JOptionPane.showMessageDialog(this, "Error al procesar: " + e.getMessage());
         }
     }//GEN-LAST:event_btnPagarActionPerformed
 

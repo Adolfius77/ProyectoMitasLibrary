@@ -4,6 +4,8 @@
  */
 package Model;
 
+import java.util.Date;
+
 /**
  *
  * @author jorge
@@ -13,17 +15,19 @@ public class MetodoPago {
     private String marca;
     private String terminacion;
     private String titular;
-    private String fechaExpiracion; 
+    private Date fechaExpiracion; 
+    private int NumeroTarjeta;
 
-    public MetodoPago(String tipo, String marca, String terminacion, String titular, String fechaExpiracion) {
+    public MetodoPago() {
+    }
+
+    public MetodoPago(String tipo, String marca, String terminacion, String titular, Date fechaExpiracion, int NumeroTarjeta) {
         this.tipo = tipo;
         this.marca = marca;
         this.terminacion = terminacion;
         this.titular = titular;
         this.fechaExpiracion = fechaExpiracion;
-    }
-
-    public MetodoPago() {
+        this.NumeroTarjeta = NumeroTarjeta;
     }
 
     public String getTipo() {
@@ -58,13 +62,24 @@ public class MetodoPago {
         this.titular = titular;
     }
 
-    public String getFechaExpiracion() {
+    public Date getFechaExpiracion() {
         return fechaExpiracion;
     }
 
-    public void setFechaExpiracion(String fechaExpiracion) {
+    public void setFechaExpiracion(Date fechaExpiracion) {
         this.fechaExpiracion = fechaExpiracion;
     }
+
+    public int getNumeroTarjeta() {
+        return NumeroTarjeta;
+    }
+
+    public void setNumeroTarjeta(int NumeroTarjeta) {
+        this.NumeroTarjeta = NumeroTarjeta;
+    }
+    
+    
+    
 
     
 }

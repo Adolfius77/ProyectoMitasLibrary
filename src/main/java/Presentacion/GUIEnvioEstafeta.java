@@ -4,24 +4,18 @@
  */
 package Presentacion;
 
-
-
 /**
  *
  * @author riosr
  */
 public class GUIEnvioEstafeta extends javax.swing.JFrame {
 
-    
-
     public GUIEnvioEstafeta() {
         initComponents();
-        
+        setLocationRelativeTo(null);
+
     }
 
-    
-
- 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -44,8 +38,6 @@ public class GUIEnvioEstafeta extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         txtNumeroCasa = new javax.swing.JTextField();
         txtCalle = new javax.swing.JTextField();
-        txtCP = new javax.swing.JTextField();
-        txtColonia = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         txtCIudad = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
@@ -53,6 +45,8 @@ public class GUIEnvioEstafeta extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         txtPais = new javax.swing.JTextField();
         btnPedirPaquete = new javax.swing.JButton();
+        txtCodigoPostal = new javax.swing.JTextField();
+        txtColonia = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -171,17 +165,6 @@ public class GUIEnvioEstafeta extends javax.swing.JFrame {
 
         txtCalle.setBackground(new java.awt.Color(255, 255, 255));
 
-        txtCP.setBackground(new java.awt.Color(255, 255, 255));
-        txtCP.setForeground(new java.awt.Color(255, 255, 255));
-        txtCP.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCPActionPerformed(evt);
-            }
-        });
-
-        txtColonia.setBackground(new java.awt.Color(255, 255, 255));
-        txtColonia.setForeground(new java.awt.Color(255, 255, 255));
-
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("NUMERO DE CASA");
@@ -210,6 +193,10 @@ public class GUIEnvioEstafeta extends javax.swing.JFrame {
             }
         });
 
+        txtCodigoPostal.setBackground(new java.awt.Color(255, 255, 255));
+
+        txtColonia.setBackground(new java.awt.Color(255, 255, 255));
+
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
         jPanel13Layout.setHorizontalGroup(
@@ -232,17 +219,6 @@ public class GUIEnvioEstafeta extends javax.swing.JFrame {
                 .addGap(0, 158, Short.MAX_VALUE)
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
-                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtCIudad, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtPais, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtColonia, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCP, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCalle, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNumeroCasa, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnPedirPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(139, 139, 139))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(293, 293, 293))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
@@ -253,7 +229,18 @@ public class GUIEnvioEstafeta extends javax.swing.JFrame {
                         .addGap(281, 281, 281))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(274, 274, 274))))
+                        .addGap(274, 274, 274))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
+                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtCIudad, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPais, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCalle, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNumeroCasa, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnPedirPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCodigoPostal, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtColonia, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(139, 139, 139))))
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -270,13 +257,13 @@ public class GUIEnvioEstafeta extends javax.swing.JFrame {
                 .addComponent(txtCalle, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtCP, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addComponent(txtCodigoPostal, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtColonia, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(2, 2, 2)
+                .addComponent(txtColonia, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -360,16 +347,38 @@ public class GUIEnvioEstafeta extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnCarritoActionPerformed
 
     private void CMBOpcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CMBOpcionesActionPerformed
-    
+
     }//GEN-LAST:event_CMBOpcionesActionPerformed
 
-    private void txtCPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCPActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCPActionPerformed
-
     private void btnPedirPaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPedirPaqueteActionPerformed
-        //Validar que no haya campos vacios
-        
+        if (txtCalle.getText().trim().isEmpty()
+                || txtNumeroCasa.getText().trim().isEmpty()
+                || txtCodigoPostal.getText().trim().isEmpty()
+                || txtCIudad.getText().trim().isEmpty()) {
+
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "Por favor llena los campos obligatorios de la dirección.");
+            return;
+        }
+
+        // 2. Crear objeto Dirección y guardarlo en la Sesión (Memoria)
+        Model.Direccion direccion = new Model.Direccion();
+        direccion.setCalle(txtCalle.getText());
+        direccion.setNumero(txtNumeroCasa.getText());
+        direccion.setCp(txtCodigoPostal.getText());
+        direccion.setColonia(txtColonia.getText());
+        direccion.setCiudad(txtCIudad.getText());
+        direccion.setEstado(txtEstado.getText());
+        direccion.setPais(txtPais.getText());
+
+        // Guardamos la dirección en la orden actual de la sesión
+        config.SesionUsuario.get().getCarrito().setDireccionEnvio(direccion);
+
+        // 3. PASO 3 DEL FLUJO: Ir a Selección de Método de Pago
+        GUIPaginasPagos seleccionPago = new GUIPaginasPagos();
+        seleccionPago.setVisible(true);
+        this.dispose();
+
     }//GEN-LAST:event_btnPedirPaqueteActionPerformed
 
     /**
@@ -430,8 +439,8 @@ public class GUIEnvioEstafeta extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTextField txtCIudad;
-    private javax.swing.JTextField txtCP;
     private javax.swing.JTextField txtCalle;
+    private javax.swing.JTextField txtCodigoPostal;
     private javax.swing.JTextField txtColonia;
     private javax.swing.JTextField txtEstado;
     private javax.swing.JTextField txtNumeroCasa;

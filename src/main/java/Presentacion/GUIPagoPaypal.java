@@ -24,7 +24,7 @@ public class GUIPagoPaypal extends javax.swing.JFrame {
      */
     public GUIPagoPaypal() {
         initComponents();
-
+        setLocationRelativeTo(null);
     }
 
     /**

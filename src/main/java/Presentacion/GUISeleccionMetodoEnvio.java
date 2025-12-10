@@ -4,6 +4,7 @@
  */
 package Presentacion;
 
+import Model.Item;
 import config.SesionUsuario;
 import javax.swing.JOptionPane;
 
@@ -18,7 +19,7 @@ public class GUISeleccionMetodoEnvio extends javax.swing.JFrame {
      */
     public GUISeleccionMetodoEnvio() {
         initComponents();
-
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -339,23 +340,31 @@ public class GUISeleccionMetodoEnvio extends javax.swing.JFrame {
     private void checkBoxEstafetaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_checkBoxEstafetaMouseClicked
 
     }//GEN-LAST:event_checkBoxEstafetaMouseClicked
-
+    private double calcularTotalLibros() {
+        double suma = 0.0;
+        for (Item item : config.SesionUsuario.get().getCarrito().getItems()) {
+            suma += item.getSubtotal();
+        }
+        return suma;
+    }
     private void checkBoxEstafetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBoxEstafetaActionPerformed
-        if (checkBoxEstafeta.isSelected()) {
-            checkBoxDHL.setSelected(false);
+        if (checkBoxDHL.isSelected()) {
+            checkBoxEstafeta.setSelected(false);
 
-            int respuesta = JOptionPane.showConfirmDialog(this, "deseas elegir estafeta(costo $120.00) y continuar al pago?", "confirmar envio",
-                     JOptionPane.YES_NO_OPTION);
-            if (respuesta == JOptionPane.YES_OPTION) {
-                SesionUsuario.get().getCarrito().setMetodoEnvio("ESTAFETA");
-                double totalActual = SesionUsuario.get().getCarrito().getTotalPagado();
-                SesionUsuario.get().getCarrito().setTotalPagado(totalActual + 120.00);
+            int respuesta = javax.swing.JOptionPane.showConfirmDialog(this,
+                    "¿Elegir DHL ($150.00)?", "Confirmar", javax.swing.JOptionPane.YES_NO_OPTION);
 
-                GUIPaginasPagos paginaPagos = new GUIPaginasPagos();
-                paginaPagos.setVisible(true);
+            if (respuesta == javax.swing.JOptionPane.YES_OPTION) {
+                config.SesionUsuario.get().getCarrito().setMetodoEnvio("DHL");
+
+                double totalLibros = calcularTotalLibros();
+                config.SesionUsuario.get().getCarrito().setTotalPagado(totalLibros + 150.00);
+
+                GUIEnvioDHL direccionDHL = new GUIEnvioDHL();
+                direccionDHL.setVisible(true);
                 this.dispose();
             } else {
-                checkBoxEstafeta.setSelected(false);
+                checkBoxDHL.setSelected(false);
             }
         }
     }//GEN-LAST:event_checkBoxEstafetaActionPerformed
@@ -365,29 +374,25 @@ public class GUISeleccionMetodoEnvio extends javax.swing.JFrame {
     }//GEN-LAST:event_checkBoxDHLMouseClicked
 
     private void checkBoxDHLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBoxDHLActionPerformed
-       if (checkBoxDHL.isSelected()) {
- 
-        checkBoxEstafeta.setSelected(false);
-
-        int respuesta = JOptionPane.showConfirmDialog(this, 
-            "¿Deseas elegir DHL (Costo $150.00) y continuar al pago?", 
-            "Confirmar Envio", 
-            JOptionPane.YES_NO_OPTION);
-
-        if (respuesta == JOptionPane.YES_OPTION) {
-            
-            SesionUsuario.get().getCarrito().setMetodoEnvio("DHL");
-            double totalActual = SesionUsuario.get().getCarrito().getTotalPagado();
-            SesionUsuario.get().getCarrito().setTotalPagado(totalActual + 150.00); 
-
-           
-            GUIPaginasPagos paginaPagos = new GUIPaginasPagos();
-            paginaPagos.setVisible(true);
-            this.dispose();
-        } else {
+        if (checkBoxEstafeta.isSelected()) {
             checkBoxDHL.setSelected(false);
+
+            int respuesta = javax.swing.JOptionPane.showConfirmDialog(this,
+                    "¿Elegir Estafeta ($120.00)?", "Confirmar", javax.swing.JOptionPane.YES_NO_OPTION);
+
+            if (respuesta == javax.swing.JOptionPane.YES_OPTION) {
+                config.SesionUsuario.get().getCarrito().setMetodoEnvio("ESTAFETA");
+
+                double totalLibros = calcularTotalLibros();
+                config.SesionUsuario.get().getCarrito().setTotalPagado(totalLibros + 120.00);
+
+                GUIEnvioEstafeta direccionEstafeta = new GUIEnvioEstafeta();
+                direccionEstafeta.setVisible(true);
+                this.dispose();
+            } else {
+                checkBoxEstafeta.setSelected(false);
+            }
         }
-    }
     }//GEN-LAST:event_checkBoxDHLActionPerformed
 
     private void btnCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriasActionPerformed

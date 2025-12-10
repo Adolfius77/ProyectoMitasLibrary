@@ -15,7 +15,7 @@ public class GUIEnvioDHL extends javax.swing.JFrame {
      */
     public GUIEnvioDHL() {
         initComponents();
-
+        setLocationRelativeTo(null);
     }
 
 
@@ -376,7 +376,6 @@ public class GUIEnvioDHL extends javax.swing.JFrame {
             return;
         }
 
-        
         Model.Direccion dir = new Model.Direccion();
         dir.setCalle(TxtFldCalle.getText());
         dir.setNumero(TxtFldNumeroCasa.getText());
