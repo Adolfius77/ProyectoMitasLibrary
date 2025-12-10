@@ -5,6 +5,7 @@
 package Controllers;
 
 import Model.Cliente;
+import Model.Libro;
 import java.util.List;
 import java.util.Optional;
 import org.bson.types.ObjectId;
@@ -28,4 +29,6 @@ public interface IClienteController {
     List<Cliente> listarClientes() throws Exception;
 
     Cliente autenticar(String email, String password) throws Exception;
+    
+    List<Libro>filtrarLibros(String busqueda, String categoria) throws Exception;
 }

@@ -7,7 +7,9 @@ package Controllers.impl;
 import Controllers.IClienteController;
 import DAO.IClienteDAO;
 import DAO.impl.ClienteDAO;
+import DAO.impl.LibroDAO;
 import Model.Cliente;
+import Model.Libro;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -151,5 +153,19 @@ public class ClienteController implements IClienteController {
         } else {
             throw new Exception("No existe una cuenta con este correo.");
         }
+    }
+    @Override
+    public List<Libro> filtrarLibros(String busqueda, String categoria) throws Exception {
+        // Si no hay categoría seleccionada, lanzamos error
+        if (categoria == null || categoria.isBlank()) {
+            throw new Exception("La categoría es requerida");
+        }
+        
+        // Si la búsqueda está vacía, devolvemos TODOS los de esa categoría
+        if (busqueda == null || busqueda.trim().isEmpty()) {
+            return listarPorCategoria(categoria);
+        }
+        
+        return libroDAO.buscarPorTituloYCategoria(busqueda.trim(), categoria);
     }
 }

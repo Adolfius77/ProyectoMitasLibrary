@@ -17,5 +17,6 @@ public interface ILibroDAO {
     Optional<Libro> encontrarPorISBN(String ISBN) throws DaoException;
     void actualizaStock(String id, int cantidadComprada);
     List<Libro> obtenerLibrosPorCategoria(String categoria);
+   public List<Libro> buscarPorTituloYCategoria(String titulo, String categoria);
     
 }
